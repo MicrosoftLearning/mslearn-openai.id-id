@@ -43,14 +43,13 @@ Azure OpenAI menyediakan portal berbasis web bernama **Azure OpenAI Studio**, ya
 
 1. Pada halaman **Gambaran umum** untuk sumber daya Azure OpenAI Anda, gunakan tombol **Buka Azure OpenAI Studio** untuk membuka Azure OpenAI Studio di tab browser baru.
 2. Di Azure OpenAI Studio, pada halaman **Penyebaran**, lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
-    - **Model**: gpt-35-turbo-16k* (harus model ini untuk menggunakan fitur dalam latihan ini)*
+    - **Nama penyebaran**: *Nama unik pilihan Anda*
+    - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
     - **Versi model**: Pembaruan otomatis ke default
-    - **Nama penyebaran**: *Nama unik pilihan Anda. Anda akan menggunakan nama ini nanti di lab.*
-    - **Opsi tingkat lanjut**
-        - **Filter konten**: Default
-        - **Tipe penyebaran**: Standar
-        - **Batas tarif token per menit**: 5K\*
-        - **Aktifkan kuota dinamis**: Diaktifkan
+    - **Tipe penyebaran**: Standar
+    - **Batas tarif token per menit**: 5K\*
+    - **Filter konten**: Default
+    - **Aktifkan kuota dinamis**: Diaktifkan
 
     > \*Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 

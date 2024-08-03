@@ -48,14 +48,13 @@ Layanan Azure OpenAI menyediakan portal berbasis web bernama **Azure OpenAI Stud
     Setelah tab baru terbuka, Anda dapat menutup pemberitahuan spanduk apa pun untuk layanan pratinjau baru yang ditampilkan di bagian atas halaman Azure OpenAI Studio.
 
 1. Di Azure OpenAI Studio, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+    - **Nama penyebaran**: *Nama unik pilihan Anda*
     - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
     - **Versi model**: Pembaruan otomatis ke default
-    - **Nama penyebaran**: *Nama unik pilihan Anda*
-    - **Opsi tingkat lanjut**
-        - **Filter konten**: Default
-        - **Tipe penyebaran**: Standar
-        - **Batas tarif token per menit**: 5K\*
-        - **Aktifkan kuota dinamis**: Diaktifkan
+    - **Tipe penyebaran**: Standar
+    - **Batas tarif token per menit**: 5K\*
+    - **Filter konten**: Default
+    - **Aktifkan kuota dinamis**: Diaktifkan
 
     > \*Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 
@@ -67,7 +66,7 @@ Setelah menyebarkan model, Anda dapat menggunakannya untuk menghasilkan respons 
 
 1. Di bagian **Playground**, pilih halaman **Obrolan**. Halaman playground **Obrolan** terdiri dari tiga panel utama (yang dapat disusun dari kanan ke kiri secara horizontal, atau dari atas ke bawah secara vertikal bergantung pada resolusi layar Anda):
     - **Penyiapan** - digunakan untuk mengatur konteks respons model.
-    - **Sesi obrolan** - digunakan untuk mengirimkan pesan obrolan dan melihat respons.
+    - **sesi Obrolan** - digunakan untuk mengirimkan pesan obrolan dan melihat respons.
     - **Konfigurasi** - digunakan untuk mengonfigurasi pengaturan untuk penyebaran model.
 1. Di panel **Konfigurasi**, pastikan penyebaran model gpt-35-turbo-16k Anda dipilih.
 1. Di panel **Penyiapan**, tinjau **Pesan sistem** default, yang seharusnya *Anda adalah asisten AI yang membantu orang menemukan informasi.* Pesan sistem disertakan dalam perintah yang dikirimkan ke model, dan menyediakan konteks untuk respons model; menetapkan ekspektasi tentang bagaimana agen AI berdasarkan model harus berinteraksi dengan pengguna.
@@ -167,4 +166,4 @@ Sekarang setelah Anda menjelajahi beberapa kemampuan model AI generatif di playg
 
 ## Penghapusan
 
-Setelah Anda selesai dengan sumber daya Azure OpenAI, ingatlah untuk menghapus penyebaran atau seluruh sumber daya di **portal Azure** di `https://portal.azure.com`.
+Setelah Anda selesai dengan sumber daya Azure OpenAI, ingatlah untuk menghapus penyebaran atau seluruh sumber daya pada **portal Microsoft Azure** di `https://portal.azure.com`.
