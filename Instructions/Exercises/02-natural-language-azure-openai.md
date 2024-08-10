@@ -17,7 +17,7 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
 
 1. Masuk ke **portal Microsoft Azure** di `https://portal.azure.com`.
 2. Buat sumber daya **Azure OpenAI** dengan pengaturan berikut:
-    - **Subscription**: *Pilih langganan Azure yang telah disetujui untuk akses ke layanan Azure OpenAI*
+    - **Subscription**: *Pilih langganan Azure yang telah disetujui untuk akses ke Azure OpenAI Service*
     - **Grup sumber daya**: *Memilih atau membuat grup sumber daya*
     - **Wilayah**: *Buat **pilihan acak** dari salah satu wilayah berikut*\*
         - Australia Timur
@@ -39,17 +39,18 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
 
 ## Terapkan model
 
-Azure OpenAI menyediakan portal berbasis web bernama **Azure OpenAI Studio**, yang dapat Anda gunakan untuk menyebarkan, mengelola, dan menjelajahi model. Anda akan memulai eksplorasi Azure OpenAI dengan menggunakan Azure OpenAI Studio untuk menyebarkan model.
+Azure OpenAI menyediakan portal berbasis web bernama **Azure OpenAI Studio**, yang dapat Anda gunakan untuk menyebarkan, mengelola, dan menjelajahi berbagai model. Anda akan memulai penjelajahan Azure OpenAI dengan menggunakan Azure OpenAI Studio untuk menyebarkan satu model.
 
-1. Pada halaman **Gambaran umum** untuk sumber daya Azure OpenAI Anda, gunakan tombol **Buka Azure OpenAI Studio** untuk membuka Azure OpenAI Studio di tab browser baru.
+1. Pada halaman **Gambaran Umum** untuk sumber daya Azure OpenAI Anda, gunakan tombol **Buka Azure OpenAI Studio** untuk membuka Azure OpenAI Studio di tab browser baru.
 2. Di Azure OpenAI Studio, pada halaman **Penyebaran**, lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
-    - **Nama penyebaran**: *Nama unik pilihan Anda*
     - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
     - **Versi model**: Pembaruan otomatis ke default
-    - **Tipe penyebaran**: Standar
-    - **Batas tarif token per menit**: 5K\*
-    - **Filter konten**: Default
-    - **Aktifkan kuota dinamis**: Diaktifkan
+    - **Nama penyebaran**: *Nama unik pilihan Anda. Anda akan menggunakan nama ini nanti di lab.*
+    - **Opsi tingkat lanjut**
+        - **Filter konten**: Default
+        - **Tipe penyebaran**: Standar
+        - **Batas tarif token per menit**: 5K\*
+        - **Aktifkan kuota dinamis**: Diaktifkan
 
     > \*Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 
@@ -57,13 +58,13 @@ Azure OpenAI menyediakan portal berbasis web bernama **Azure OpenAI Studio**, ya
 
 Anda akan mengembangkan aplikasi Azure OpenAI menggunakan Visual Studio Code. File kode untuk aplikasi Anda telah disediakan di repositori GitHub.
 
-> **Tips**: Jika Anda telah mengkloning repositori **mslearn-openai**, buka di kode Visual Studio. Atau, ikuti langkah-langkah ini untuk mengkloningnya ke lingkungan pengembangan Anda.
+> **Tips**: Jika Anda telah membuat klon repositori **mslearn-openai**, buka klon tersebut di Visual Studio Code. Atau, ikuti langkah-langkah ini untuk mengkloningnya ke lingkungan pengembangan Anda.
 
 1. Memulai Visual Studio Code.
 2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 
-    > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai pembuatnya** di pop-up.
+    > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda untuk memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai penulisnya** pada pop-up tersebut.
 
 4. Tunggu sementara file tambahan diinstal untuk mendukung proyek kode C# di repositori.
 
@@ -73,8 +74,8 @@ Anda akan mengembangkan aplikasi Azure OpenAI menggunakan Visual Studio Code. Fi
 
 Aplikasi untuk C# dan Python telah disediakan. Kedua aplikasi memiliki fungsionalitas yang sama. Pertama, Anda akan menyelesaikan beberapa bagian utama aplikasi untuk mengaktifkan menggunakan sumber daya Azure OpenAI Anda.
 
-1. Di Visual Studio Code, di panel **Penjelajah**, telusuri folder **Labfiles/02-azure-openai-api** dan perluas folder **CSharp** atau **Python** tergantung pada preferensi bahasa Anda. Setiap folder berisi file khusus bahasa untuk aplikasi tempat Anda akan mengintegrasikan fungsionalitas Azure OpenAI.
-2. Klik kanan folder **CSharp** atau **Python** yang berisi file kode Anda dan buka terminal terintegrasi. Kemudian instal paket Azure OpenAI SDK dengan menjalankan perintah yang sesuai untuk preferensi bahasa Anda:
+1. Di Visual Studio Code, di panel **Explorer**, telusuri folder **Labfiles/02-azure-openai-api** dan perluas folder **CSharp** atau **Python** tergantung pada preferensi bahasa Anda. Setiap folder berisi file khusus bahasa untuk aplikasi tempat Anda akan mengintegrasikan fungsionalitas Azure OpenAI.
+2. Klik kanan folder **CSharp** atau **Python** yang berisi file kode Anda dan buka terminal terintegrasi. Kemudian, instal paket Azure OpenAI SDK dengan menjalankan perintah yang sesuai untuk preferensi bahasa Anda:
 
     **C#**:
 
@@ -88,21 +89,21 @@ Aplikasi untuk C# dan Python telah disediakan. Kedua aplikasi memiliki fungsiona
     pip install openai==1.13.3
     ```
 
-3. Di panel **Penjelajah**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa pilihan Anda
+3. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa antarmuka pilihan pengguna
 
     - **C#**: appsettings.json
     - **Python**: .env
     
 4. Perbarui nilai konfigurasi untuk menyertakan:
-    - **titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
+    - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
     - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di Azure OpenAI Studio).
 5. Simpan file konfigurasi.
 
-## Menambahkan kode untuk menggunakan layanan Azure OpenAI
+## Menambahkan kode untuk menggunakan Azure OpenAI Service
 
 Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang Anda sebarkan.
 
-1. Pada panel **Penjelajah**, di folder **CSharp** atau **Python**, buka file kode untuk bahasa antarmuka pilihan pengguna, lalu ganti komentar ***Tambahkan paket Azure OpenAI*** dengan kode untuk menambahkan pustaka Azure OpenAI SDK:
+1. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file kode untuk bahasa antarmuka pilihan pengguna, lalu ganti komentar ***Tambahkan paket Azure OpenAI*** dengan kode untuk menambahkan pustaka Azure OpenAI SDK:
 
     **C#**: Program.cs
 
@@ -211,14 +212,14 @@ Setelah dikonfigurasi, kini saatnya menjalankan aplikasi Anda untuk mengirimkan 
 1. Saat diminta, masukkan teks `What hike should I do near Rainier?`.
 1. Amati output, perhatikan bahwa respons mengikuti panduan yang disediakan dalam pesan sistem yang Anda tambahkan ke array*pesan*.
 1. Berikan perintah `Where should I hike near Boise? I'm looking for something of easy difficulty, between 2 to 3 miles, with moderate elevation gain.` dan amati output.
-1. Dalam file kode untuk bahasa pilihan Anda, ubah nilai parameter *suhu* dalam permintaan Anda menjadi **1.0** dan simpan file.
+1. Dalam file kode untuk bahasa pilihan Anda, ubah nilai parameter *temperature* dalam permintaan Anda menjadi **1.0** dan simpan file.
 1. Jalankan aplikasi lagi menggunakan perintah di atas, dan amati output.
 
 Meningkatkan suhu sering menyebabkan respons bervariasi, bahkan ketika disediakan teks yang sama, karena peningkatan keacakan. Anda dapat menjalankannya beberapa kali untuk melihat bagaimana output dapat berubah. Coba gunakan nilai yang berbeda untuk suhu Anda dengan input yang sama.
 
 ## Mempertahankan riwayat percakapan
 
-Di sebagian besar aplikasi dunia nyata, kemampuan untuk mereferensikan bagian percakapan sebelumnya memungkinkan interaksi yang lebih realistis dengan agen AI. Api Azure OpenAI tanpa status berdasarkan desain, tetapi dengan memberikan riwayat percakapan dalam perintah Anda, Anda mengaktifkan model AI untuk mereferensikan pesan sebelumnya.
+Di sebagian besar aplikasi dunia nyata, kemampuan untuk mereferensikan bagian percakapan sebelumnya memungkinkan interaksi yang lebih realistis dengan agen AI. API Azure OpenAI tanpa status berdasarkan desain, tetapi dengan memberikan riwayat percakapan dalam perintah Anda, Anda mengaktifkan model AI untuk mereferensikan pesan sebelumnya.
 
 1. Jalankan aplikasi lagi dan berikan perintah `Where is a good hike near Boise?`.
 1. Amati output, lalu berikan perintah `How difficult is the second hike you suggested?`.
@@ -242,7 +243,7 @@ Di sebagian besar aplikasi dunia nyata, kemampuan untuk mereferensikan bagian pe
     messages_array = [{"role": "system", "content": system_message}]
     ```
 
-1. Di bawah komentar ***Tambahkan kode untuk mengirim permintaan...***, ganti semua kode dari komentar ke akhir **saat** perulangan dengan kode berikut lalu simpan file. Kode sebagian besar sama, tetapi sekarang menggunakan array pesan untuk menyimpan riwayat percakapan.
+1. Di bawah komentar ***Tambahkan kode untuk mengirim permintaan...***, ganti semua kode dari komentar ke akhir perulangan **while** dengan kode berikut lalu simpan file. Kode sebagian besar sama, tetapi sekarang menggunakan array pesan untuk menyimpan riwayat percakapan.
 
     **C#**: Program.cs
 
