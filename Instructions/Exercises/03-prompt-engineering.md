@@ -39,19 +39,19 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
 
 ## Terapkan model
 
-Azure menyediakan portal berbasis web bernama **Azure AI Studio**, yang dapat Anda gunakan untuk menyebarkan, mengelola, dan menjelajahi berbagai model. Anda akan memulai penjelajahan Azure OpenAI dengan menggunakan Azure AI Studio untuk menyebarkan model.
+Azure menyediakan portal berbasis web bernama **Azure AI Studio** yang dapat Anda gunakan untuk menyebarkan, mengelola, dan menjelajahi berbagai model. Anda akan memulai penjelajahan Azure OpenAI dengan menggunakan Azure AI Studio untuk menyebarkan satu model.
 
 > **Catatan**: Saat Anda menggunakan Azure AI Studio, kotak pesan yang menyarankan tugas untuk Anda lakukan dapat ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
 
-1. Di portal Azure, pada halaman **Ringkasan** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Mulai** dan pilih tombol untuk masuk ke **AI Studio**.
-1. Di Azure AI Studio, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+1. Di portal Azure, pada **halaman Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian  **Memulai** dan pilih tombol untuk masuk ke **AI Studio**.
+1. Di Azure OpenAI Studio, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
     - **Nama penyebaran**: *Nama unik pilihan Anda*
     - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
     - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
     - **Batas tarif token per menit**: 5K\*
     - **Filter konten**: Default
-    - **Aktifkan kuota dinamis**: Non Aktif
+    - **Aktifkan kuota dinamis**: Dinonaktifkan
 
     > \*Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 
@@ -59,11 +59,11 @@ Azure menyediakan portal berbasis web bernama **Azure AI Studio**, yang dapat An
 
 Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playground Obrolan.
 
-1. Di bagian **Playground**, pilih halaman **Obrolan**. Halaman playground **Obrolan** terdiri atas sederetan tombol dan dua panel utama (yang bisa disusun dari kanan ke kiri secara horizontal, atau dari atas ke bawah secara vertikal, tergantung resolusi layar Anda):
+1. Di bagian **Playground**, pilih halaman **Obrolan**. Halaman playground **Obrolan** terdiri dari sederet tombol dan dua panel utama (yang dapat disusun dari kanan ke kiri secara horizontal, atau dari atas ke bawah secara vertikal bergantung pada resolusi layar Anda):
     - **Konfigurasi** - digunakan untuk memilih penyebaran Anda, menentukan pesan sistem, dan mengatur parameter untuk berinteraksi dengan penyebaran Anda.
     - **sesi Obrolan** - digunakan untuk mengirimkan pesan obrolan dan melihat respons.
 2. Di bawah **Penyebaran**, pastikan bahwa penyebaran model gpt-35-turbo-16k Anda dipilih.
-1. Tinjau **Pesan sistem** default, yang seharusnya *Anda adalah asisten AI yang membantu orang menemukan informasi*.
+1. Tinjau **Pesan sistem** default, yang seharusnya *Anda adalah asisten AI yang membantu orang menemukan informasi.*
 4. Dalam**Sesi obrolan**, masukkan kueri berikut:
 
     ```prompt
@@ -82,7 +82,7 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 
 5. Di bagian **Konfigurasi**, ubah pesan sistem menjadi `You are a news aggregator that categorizes news articles.`
 
-6. Di bawah pesan sistem baru, pilih tombol **Tambah bagian**, dan pilih **Contoh**. Kemudian, tambahkan contoh berikut.
+6. Di bawah pesan sistem baru, pilih tombol **Tambah bagian**, lalu pilih **Contoh**. Kemudian, tambahkan contoh berikut.
 
     **Pengguna:**
     
@@ -145,7 +145,7 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 
     Kombinasi pesan sistem yang lebih spesifik serta beberapa contoh kueri dan respons yang diharapkan akan menghasilkan format yang konsisten untuk hasilnya.
 
-10. Ubah pesan sistem kembali ke templat default, yang seharusnya `You are an AI assistant that helps people find information.` tanpa contoh. Setelah itu, terapkan perubahannya.
+10. Ubah pesan sistem kembali ke templat default, yakni `You are an AI assistant that helps people find information.` tanpa disertai contoh. Setelah itu, terapkan perubahannya.
 
 11. Di bagian **Sesi obrolan**, masukkan ulang perintah berikut:
 
@@ -210,7 +210,7 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
     
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - **Nama penyebaran** yang Anda tentukan untuk penyerapan model Anda (tersedia di halaman **Penyebaran** di Azure AI Studio).
+    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di Azure OpenAI Studio).
 5. Simpan file konfigurasi.
 
 ## Menambahkan kode untuk menggunakan Azure OpenAI Service
@@ -301,7 +301,7 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
 
 Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan Anda ke model Anda dan amati responsnya. Anda akan melihat bahwa satu-satunya perbedaan antara berbagai opsinya adalah konten perintahnya, semua parameter lainnya (seperti jumlah token dan temperatur) tetap sama untuk setiap permintaan.
 
-1. Di folder bahasa antarmuka pilihan pengguna, buka `system.txt` di Visual Studio Code. Untuk setiap interaksi, Anda akan memasukkan **Pesan sistem** dalam file ini dan menyimpannya. Setiap iterasi akan dijeda terlebih dahulu agar Anda dapat mengubah pesan sistem.
+1. Di folder bahasa antarmuka pilihan pengguna, buka `system.txt` di Visual Studio Code. Untuk setiap iterasi, masukkan **Pesan sistem** dalam file ini dan simpan. Setiap iterasi akan dijeda terlebih dahulu agar Anda dapat mengubah pesan sistem.
 1. Di panel terminal interaktif, pastikan konteks folder adalah folder untuk bahasa pilihan Anda. Lalu masukkan perintah berikut untuk menjalankan aplikasi.
 
     - **C#:** `dotnet run`
@@ -340,8 +340,6 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     - It specializes in elephants 
     - Call for donations to be given at our website
     ```
-
-    > **Tip**: Anda mungkin mendapati bahwa pengetikan otomatis pada VM tidak berfungsi dengan baik dengan prompt multiline. Jika itu masalah Anda, salin seluruh perintah lalu tempelkan ke Visual Studio Code.
 
 1. Amati output. Kali ini, Anda mungkin akan melihat format email yang berisi spesies hewan tertentu serta ajakan untuk berdonasi.
 1. Selanjutnya, masukkan perintah berikut yang juga menentukan kontennya:

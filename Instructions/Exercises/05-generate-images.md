@@ -16,7 +16,7 @@ Latihan ini akan memakan waktu sekitar **25** menit.
 Sebelum dapat menggunakan Azure OpenAI, Anda harus memprovisikan sumber daya Azure OpenAI di langganan Azure Anda. Sumber daya harus berada di wilayah yang mendukung DALL-E.
 
 1. Masuk ke **portal Microsoft Azure** di `https://portal.azure.com`.
-2. Buat sumber daya **Azure OpenAI** dengan pengaturan berikut:
+1. Buat sumber daya **Azure OpenAI** dengan pengaturan berikut:
     - **Subscription**: *Pilih langganan Azure yang telah disetujui untuk akses ke Azure OpenAI Service, termasuk DALL-E*
     - **Grup sumber daya**: *Memilih atau membuat grup sumber daya*
     - **Wilayah**: *Pilih **US Timur** atau **Swedia Tengah***\*
@@ -25,21 +25,29 @@ Sebelum dapat menggunakan Azure OpenAI, Anda harus memprovisikan sumber daya Azu
 
     > \* model DALL-E 3 hanya tersedia di sumber daya Azure OpenAI Service di wilayah **US Timur** dan **Swedia Tengah**.
 
-3. Tunggu hingga penerapan selesai. Kemudian buka sumber daya Azure OpenAI yang disebarkan di portal Microsoft Azure.
+1. Tunggu hingga penerapan selesai. Kemudian buka sumber daya Azure OpenAI yang disebarkan di portal Microsoft Azure.
+1. Pada halaman **Ringkasan** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Mulai** dan pilih tombol untuk masuk ke **AI Studio**.
+1. Di Azure OpenAI Studio, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya untuk DALL-E 3, buat penyebaran baru model **dall-e-3** dengan pengaturan berikut:
+    - **Nama penyebaran**: dalle3
+    - **Versi model**: *Gunakan versi default*
+    - **Tipe penyebaran**: Standar
+    - **Unit kapasitas**: 1K
+    - **Filter konten**: Default
+    - **Aktifkan kuota dinamis**: Dinonaktifkan
+1. Satu disebarkan, navigasikan kembali ke halaman **Gambar** di panel kiri.
 
-## Menjelajahi pembuatan gambar di playground DALL-E
+## Menjelajahi pembuatan gambar di playground gambar
 
-Anda dapat menggunakan playground DALL-E di **Azure OpenAI Studio** untuk bereksperimen dengan pembuatan gambar.
+Anda dapat menggunakan playground gambar di **Azure AI Studio** untuk bereksperimen dengan pembuatan gambar.
 
-1. Di portal Microsoft Azure, pada halaman **Gambaran Umum** untuk sumber daya Azure OpenAI Anda, gunakan tombol **Jelajahi** untuk membuka Azure OpenAI Studio pada tab browser baru. Atau, navigasikan ke [Azure OpenAI Studio](https://oai.azure.com) secara langsung di `https://oai.azure.com`.
-2. Di bagian **Playground**, pilih playground **DALL-E**. Penyebaran model DALL-E bernama *Dalle3* akan dibuat secara otomatis.
-3. Dalam kotak **Perintah**, masukkan deskripsi gambar yang ingin Anda hasilkan. Misalnya, `An elephant on a skateboard`. Kemudian, pilih **Hasilkan** dan lihat gambar yang dihasilkan.
+1. Di bagian **Playground gambar**, penyebaran DALL-E 3 Anda harus dipilih secara otomatis. Jika tidak, pilih dari menu dropdown penyebaran.
+1. Dalam kotak **Perintah**, masukkan deskripsi gambar yang ingin Anda hasilkan. Misalnya, `An elephant on a skateboard`. Kemudian, pilih **Hasilkan** dan lihat gambar yang dihasilkan.
 
-    ![Playground DALL-E di Azure OpenAI Studio dengan gambar yang dihasilkan.](../media/dall-e-playground.png)
+    ![Playground Gambar di Azure AI Studio dengan gambar yang dihasilkan.](../media/images-playground.png)
 
-4. Ubah perintah untuk memberikan deskripsi yang lebih spesifik. Contoh: `An elephant on a skateboard in the style of Picasso`. Kemudian, hasilkan gambar baru dan tinjau hasilnya.
+1. Ubah perintah untuk memberikan deskripsi yang lebih spesifik. Contoh: `An elephant on a skateboard in the style of Picasso`. Kemudian, hasilkan gambar baru dan tinjau hasilnya.
 
-    ![Playground DALL-E di Azure OpenAI Studio dengan dua gambar yang dihasilkan.](../media/dall-e-playground-new-image.png)
+    ![Playground Gambar di Azure AI Studio dengan dua gambar yang dihasilkan.](../media/images-playground-new-style.png)
 
 ## Menggunakan REST API untuk menghasilkan gambar
 
@@ -87,6 +95,8 @@ Sekarang Anda siap untuk menjelajahi kode yang digunakan untuk memanggil REST AP
     - Kode membuat permintaan https ke titik akhir untuk layanan Anda, termasuk kunci untuk layanan Anda di header. Kedua nilai ini diperoleh dari file konfigurasi.
     - Permintaan mencakup beberapa parameter, termasuk perintah yang menjadi dasar pembuatan gambar, jumlah gambar yang akan dihasilkan, dan ukuran gambar yang dihasilkan.
     - Respons mencakup perintah yang direvisi dari hasil ekstrapolasi model DALL-E terhadap perintah yang disediakan pengguna untuk membuatnya lebih deskriptif, serta URL untuk gambar yang dihasilkan.
+    
+    > **Penting**: Jika Anda menamai penyebaran apa pun selain * dalle3* yang direkomendasikan, Anda harus memperbarui kode untuk menggunakan nama penyebaran Anda.
 
 ### Menjalankan aplikasi
 
