@@ -39,18 +39,19 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
 
 ## Terapkan model
 
-Azure OpenAI menyediakan portal berbasis web bernama **Azure OpenAI Studio**, yang dapat Anda gunakan untuk menyebarkan, mengelola, dan menjelajahi berbagai model. Anda akan memulai penjelajahan Azure OpenAI dengan menggunakan Azure OpenAI Studio untuk menyebarkan satu model.
+Azure menyediakan portal berbasis web bernama **Azure AI Studio** yang dapat Anda gunakan untuk menyebarkan, mengelola, dan menjelajahi berbagai model. Anda akan memulai penjelajahan Azure OpenAI dengan menggunakan Azure AI Studio untuk menyebarkan satu model.
 
-1. Pada halaman **Gambaran Umum** untuk sumber daya Azure OpenAI Anda, gunakan tombol **Buka Azure OpenAI Studio** untuk membuka Azure OpenAI Studio di tab browser baru.
-2. Di Azure OpenAI Studio, pada halaman **Penyebaran**, lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+> **Catatan**: Saat Anda menggunakan Azure AI Studio, kotak pesan yang menyarankan tugas untuk Anda lakukan dapat ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
+
+1. Di portal Azure, pada **halaman Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian  **Memulai** dan pilih tombol untuk masuk ke **AI Studio**.
+1. Di Azure OpenAI Studio, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+    - **Nama penyebaran**: *Nama unik pilihan Anda*
     - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
-    - **Versi model**: Pembaruan otomatis ke default
-    - **Nama penyebaran**: *Nama unik pilihan Anda. Anda akan menggunakan nama ini nanti di lab.*
-    - **Opsi tingkat lanjut**
-        - **Filter konten**: Default
-        - **Tipe penyebaran**: Standar
-        - **Batas tarif token per menit**: 5K\*
-        - **Aktifkan kuota dinamis**: Diaktifkan
+    - **Versi model**: *Gunakan versi default*
+    - **Tipe penyebaran**: Standar
+    - **Batas tarif token per menit**: 5K\*
+    - **Filter konten**: Default
+    - **Aktifkan kuota dinamis**: Dinonaktifkan
 
     > \*Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 
@@ -96,7 +97,7 @@ Aplikasi untuk C# dan Python telah disediakan. Kedua aplikasi memiliki fungsiona
     
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di Azure OpenAI Studio).
+    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di Azure AI Studio).
 5. Simpan file konfigurasi.
 
 ## Menambahkan kode untuk menggunakan Azure OpenAI Service
