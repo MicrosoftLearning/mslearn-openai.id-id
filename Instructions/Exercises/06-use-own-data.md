@@ -7,7 +7,7 @@ lab:
 
 Azure OpenAI Service memungkinkan Anda menggunakan data Anda sendiri dengan kecerdasan LLM yang mendasarinya. Anda dapat membatasi model untuk hanya menggunakan data Anda untuk topik yang berkaitan, atau memadukannya dengan hasil dari model yang telah dilatih sebelumnya.
 
-Dalam skenario untuk latihan ini, Anda akan melakukan peran pengembang perangkat lunak yang bekerja untuk Biro Perjalanan Margie. Anda akan menjelajahi cara menggunakan Azure AI Search untuk mengindeks data Anda sendiri dan menggunakannya dengan Azure OpenAI untuk menambah permintaan.
+Dalam skenario untuk latihan ini, Anda akan melakukan peran pengembang perangkat lunak yang bekerja untuk Biro Perjalanan Margie. Anda akan menjelajahi cara menggunakan Pencarian Azure AI untuk mengindeks data Anda sendiri dan menggunakannya dengan Azure OpenAI untuk menambah permintaan.
 
 Latihan ini akan memakan waktu sekitar **30** menit.
 
@@ -15,9 +15,9 @@ Latihan ini akan memakan waktu sekitar **30** menit.
 
 Untuk menyelesaikan latihan ini, Anda perlu:
 
-- Sumber daya Azure OpenAI
-- Sumber daya Azure AI Search.
-- Sumber daya Akun Penyimpanan Azure
+- Sumber daya Azure OpenAI.
+- Sumber daya Pencarian Azure AI
+- Sumber daya Akun Azure Storage.
 
 1. Masuk ke **portal Microsoft Azure** di `https://portal.azure.com`.
 2. Buat sumber daya **Azure OpenAI** dengan pengaturan berikut:
@@ -39,38 +39,38 @@ Untuk menyelesaikan latihan ini, Anda perlu:
 
     > \* Sumber daya Azure OpenAI dibatasi oleh kuota regional. Wilayah yang tercantum mencakup kuota default untuk tipe model yang digunakan dalam latihan ini. Memilih wilayah secara acak akan mengurangi risiko satu wilayah mencapai batas kuota dalam skenario di mana Anda berbagi langganan dengan pengguna lain. Jika batas kuota tercapai di akhir latihan, Anda mungkin perlu membuat sumber daya lain di wilayah yang berbeda.
 
-3. Saat sumber daya Azure OpenAI sedang disediakan, buat **sumber daya Azure AI Search** dengan pengaturan berikut:
+3. Saat sumber daya Azure OpenAI sedang disediakan, buat sumber daya**Pencarian Azure AI** dengan pengaturan berikut:
     - **Langganan**: *Langganan tempat Anda menyediakan sumber daya Azure OpenAI*
     - **Grup sumber daya**: *Grup sumber daya tempat Anda menyediakan sumber daya Azure OpenAI*
     - **Nama layanan**: *Nama unik pilihan Anda*
     - **Lokasi**: *Wilayah tempat Anda menyediakan sumber daya Azure OpenAI*
     - **Tingkat harga**: Dasar
-4. Saat sumber daya Azure AI Search sedang disediakan, buat sumber daya **Akun penyimpanan** dengan pengaturan berikut:
+4. Saat sumber daya Azure AI Search sedang disediakan, buat sumber daya **akun Penyimpanan** dengan pengaturan berikut:
     - **Langganan**: *Langganan tempat Anda menyediakan sumber daya Azure OpenAI*
     - **Grup sumber daya**: *Grup sumber daya tempat Anda menyediakan sumber daya Azure OpenAI*
-    - **Nama akun penyimpanan**: *Nama unik pilihan Anda*.
+    - **Nama akun penyimpanan**: *Nama yang unik sesuai pilihan Anda*
     - **Wilayah**: *Wilayah tempat Anda menyediakan sumber daya Azure OpenAI*
     - **Performa**: Standar
     - **Redundansi**: Penyimpanan redundan secara lokal (LRS)
 5. Setelah ketiga sumber daya berhasil disebarkan di langganan Azure Anda, tinjau di portal Azure dan kumpulkan informasi berikut (yang akan Anda butuhkan nanti dalam latihan):
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - Titik akhir untuk layanan Azure AI Search Anda (nilai **Url** pada halaman ikhtisar untuk sumber daya Azure AI Search Anda di portal Azure).
-    -  **Kunci admin utama** untuk sumber daya Azure AI Search Anda (tersedia di **halaman Kunci** untuk sumber daya Azure AI Search Anda di portal Azure).
+    - Titik akhir untuk layanan Pencarian Azure AI Anda (nilai **Url** pada halaman gambaran umum untuk sumber daya pencarian Anda di portal Microsoft Azure).
+    - Sebuah **kunci admin utama ** untuk sumber daya Azure AI Search Anda (tersedia di halaman **Kunci** untuk sumber daya Azure AI Search Anda di portal Azure).
 
 ## Unggah data Anda
 
-Anda akan membumikan permintaan yang Anda gunakan dengan model AI generatif dengan menggunakan data Anda sendiri. Dalam latihan ini, data terdiri dari kumpulan brosur perjalanan dari perusahaan *Margies Travel*.
+Anda akan membumikan permintaan yang Anda gunakan dengan model AI generatif dengan menggunakan data Anda sendiri. Dalam latihan ini, data terdiri dari kumpulan brosur perjalanan dari perusahaan fiksi *Margies Travel*.
 
 1. Di tab browser baru, unduh arsip data brosur dari `https://aka.ms/own-data-brochures`. Ekstrak brosur ke folder di PC Anda.
-1. Di portal Azure, navigasikan ke akun penyimpanan Anda dan lihat halaman **Browser penyimpanan**.
-1. Pilih **Kontainer** Blob lalu tambahkan kontainer baru bernama `margies-travel`.
-1. **Pilih kontainer margies-travel**, lalu unggah brosur .pdf yang Anda ekstrak sebelumnya ke folder akar kontainer blob.
+1. Di portal Azure, navigasikan ke akun penyimpanan Anda dan lihat halaman **browser.Penyimpanan**.
+1. Pilih **Kontainer blob** lalu tambahkan kontainer baru bernama `margies-travel`.
+1. Pilih kontainer **margies-travel**, lalu unggah brosur pdf yang Anda ekstrak sebelumnya ke folder akar kontainer blob.
 
-## Terapkan model AI
+## Sebarkan model AI
 
 Anda akan menggunakan dua model AI dalam latihan ini:
 
-- Model penyematan teks untuk *mem-vektorisasi* teks dalam brosur sehingga dapat diindeks secara efisien untuk digunakan dalam perintah grounding.
+- Model penyematan teks untuk *memvektorisasi* teks dalam brosur sehingga dapat diindeks secara efisien untuk digunakan dalam perintah grounding.
 - Model GPT yang dapat digunakan aplikasi Anda untuk menghasilkan respons terhadap perintah yang di-grounded dalam data Anda.
 
 Untuk menyebarkan model ini, Anda akan menggunakan AI Studio.
@@ -78,7 +78,8 @@ Untuk menyebarkan model ini, Anda akan menggunakan AI Studio.
 1. Di portal Azure, navigasikan ke sumber daya Azure OpenAI Anda. Kemudian gunakan tautan untuk membuka sumber daya Anda di **Azure AI Studio**..
 1. Di Azure AI Studio, pada halaman **Penyebaran**, lihat penyebaran model yang sudah ada. Kemudian buat penyebaran model dasar baru dari **model text-embedding-ada-002** dengan pengaturan berikut:
     - **Nama penyebaran**: text-embedding-ada-002
-    - **Versi model**: *Versi default*
+    - **Model**: text-embedding-ada:002
+    - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
     - **Batas tarif token per menit**: 5K\*
     - **Filter konten**: Default
@@ -86,7 +87,7 @@ Untuk menyebarkan model ini, Anda akan menggunakan AI Studio.
 1. Setelah model penyematan teks disebarkan, kembali ke halaman **Penyebaran** dan buat penyebaran **baru model gpt-35-turbo-16k** dengan pengaturan berikut:
     - **Nama penyebaran**: gpt-35-turbo-16k
     - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
-    - **Versi model**: *Versi default*
+    - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
     - **Batas tarif token per menit**: 5K\*
     - **Filter konten**: Default
@@ -96,27 +97,27 @@ Untuk menyebarkan model ini, Anda akan menggunakan AI Studio.
 
 ## Buat indeks
 
-Untuk memudahkan penggunaan data Anda sendiri dalam perintah, Anda akan mengindeksnya menggunakan Azure AI Search. Anda akan menggunakan mdoel penyematan teks yang Anda sebarkan sebelumnya selama proses pengindeksan untuk *mem-vektorisasi* data teks (yang menghasilkan setiap token teks dalam indeks yang diwakili oleh vektor numerik - membuatnya kompatibel dengan cara model AI generatif mewakili teks)
+Untuk memudahkan penggunaan data Anda sendiri dalam perintah, Anda akan mengindeksnya menggunakan Pencarian Azure AI. Anda akan menggunakan mdoel penyematan teks yang Anda sebarkan sebelumnya selama proses pengindeksan untuk *memvektorisasi* data teks (yang menghasilkan setiap token teks dalam indeks yang diwakili oleh vektor numerik - membuatnya kompatibel dengan cara model AI generatif mewakili teks)
 
-1. Di portal Azure, navigasikan ke sumber daya Azure AI Search Anda.
-1. Pada halaman **Ikhtisar**, pilih **Impor dan vektorisasi data**.
-1. **Di halaman Siapkan koneksi** data Anda, pilih **Azure Blob Storage** dan konfigurasikan sumber data dengan pengaturan berikut:
-    - **Langganan**: Langganan Azure tempat Anda menyediakan akun penyimpanan Anda.
-    - **Akun Blob storage**: Akun penyimpanan yang Anda buat sebelumnya.
-    - **Kontainer Blob**: margies-travel
-    - **Folder Blob**: *Biarkan ini kosong*
+1. Di portal Azure, navigasikan ke sumber daya Pencarian Azure AI Anda.
+1. Pada halaman **Gambaran Umum**, pilih **Impor dan vektorisasi data**.
+1. Di **halaman Atur koneksi data Anda**, pilih **Azure Blob Storage** dan konfigurasikan sumber data dengan pengaturan berikut:
+    - **Langganan**: Langganan Azure tempat Anda memprovisikan akun penyimpanan Anda.
+    - **Akun penyimpanan blob**: Pilih akun penyimpanan yang Anda buat sebelumnya.
+    - **Kontainer blob**: margies-travel
+    - **Folder blob**: *Biarkan kosong*
     - **Aktifkan pelacakan penghapusan**: Tidak dipilih
     - **Autentikasi menggunakan identitas terkelola**: Tidak dipilih
-1. Pada halaman **Vektorisasi teks** Anda, pilih pengaturan berikut:
+1. Pada halaman **Vektorisasi teks Anda**, pilih pengaturan berikut:
     - **Jenis**: Azure OpenAI
     - **Langganan**: Langganan Azure tempat Anda menyediakan layanan Azure OpenAI Anda.
-    - **Azure OpenAI Service**: Sumber daya Azure OpenAI Service Anda
-    - **Model penyebaran**: text-embedding-ada-002
+    - **Layanan Azure OpenAI**: Sumber daya Layanan Azure OpenAI Anda
+    - **Penyebaran model**: text-embedding-ada-002
     - **Jenis autentikasi**: Kunci API
-    - **Saya mengakui bahwa menyambungkan ke layanan Azure OpenAI akan dikenakan biaya tambahan ke akun** saya: Dipilih
-1. Pada halaman berikutnya, <u>jangan</u> pilih toption untuk mem-vektorisasi gambar atau mengekstrak data dengan keterampilan AI.
+    - **Saya mengakui bahwa menyambungkan ke layanan Azure OpenAI akan dikenakan biaya tambahan ke akun saya**: Dipilih
+1. Pada halaman berikutnya, <u>jangan</u> pilih toption untuk memvektorisasi gambar atau mengekstrak data dengan keterampilan AI.
 1. Pada halaman berikutnya, aktifkan peringkat semantik dan jadwalkan pengindeks untuk dijalankan sekali.
-1. Pada halaman akhir, atur **awalan** nama Objek ke `margies-index` lalu buat indeks.
+1. Pada halaman akhir, atur **Awalan nama objek** ke `margies-index` dan lalu buat indeks.
 
 ## Bersiap untuk mengembangkan aplikasi di Visual Studio Code
 
@@ -160,7 +161,7 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
     
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di Azure OpenAI Studio).
+    - **Nama penyebaran** yang Anda tentukan untuk penyerapan model Anda (tersedia di halaman **Penyebaran** di Azure AI Studio).
     - Titik akhir untuk layanan pencarian Anda (nilai **Url** pada halaman gambaran umum untuk sumber daya pencarian Anda di portal Microsoft Azure).
     - **Kunci** untuk sumber daya pencarian Anda (tersedia di halaman **Kunci** untuk sumber daya pencarian Anda di portal Microsoft Azure - Anda dapat menggunakan salah satu kunci admin)
     - Nama indeks pencarian (yang harus `margies-index`).
