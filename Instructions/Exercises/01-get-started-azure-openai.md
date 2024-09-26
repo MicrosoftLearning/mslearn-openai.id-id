@@ -137,6 +137,8 @@ Anda telah menjelajahi bagaimana pesan sistem, contoh, dan perintah dapat memban
 
 Sekarang setelah Anda menjelajahi beberapa kemampuan model AI generatif di playground Azure AI Studio, Anda dapat menyebarkan aplikasi web Azure untuk menyediakan antarmuka agen AI dasar yang dapat digunakan pengguna untuk mengobrol dengan model tersebut.
 
+> **Catatan**: Azure AI Studio masih dalam pratinjau. Untuk beberapa pengguna, penyebaran ke aplikasi web tidak dapat disebarkan karena bug dalam templat di studio. Jika demikian, lewati bagian ini.
+
 1. Di kanan atas halaman playground **Obrolan**, pada menu **Sebarkan ke**, pilih **Aplikasi web baru**.
 1. Dalam kotak dialog **Sebarkan ke aplikasi web**, buat aplikasi web baru dengan pengaturan berikut:
     - **Nama**: *Nama unik*

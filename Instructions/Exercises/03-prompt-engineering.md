@@ -178,7 +178,7 @@ Sekarang mari kita jelajahi rekayasa perintah di aplikasi yang menggunakan Azure
 2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 
-    > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda untuk memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai penulisnya** pada pop-up tersebut.
+    > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai pembuatnya** di pop-up.
 
 4. Tunggu sementara file tambahan diinstal untuk mendukung proyek kode C# di repositori.
 
@@ -340,6 +340,8 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     - It specializes in elephants 
     - Call for donations to be given at our website
     ```
+
+    > **Tip**: Anda mungkin mendapati bahwa pengetikan otomatis pada VM tidak berfungsi dengan baik dengan prompt multiline. Jika itu masalah Anda, salin seluruh perintah lalu tempelkan ke Visual Studio Code.
 
 1. Amati output. Kali ini, Anda mungkin akan melihat format email yang berisi spesies hewan tertentu serta ajakan untuk berdonasi.
 1. Selanjutnya, masukkan perintah berikut yang juga menentukan kontennya:
