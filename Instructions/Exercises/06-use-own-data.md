@@ -115,7 +115,7 @@ Untuk memudahkan penggunaan data Anda sendiri dalam perintah, Anda akan menginde
     - **Penyebaran model**: text-embedding-ada-002
     - **Jenis autentikasi**: Kunci API
     - **Saya mengakui bahwa menyambungkan ke layanan Azure OpenAI akan dikenakan biaya tambahan ke akun saya**: Dipilih
-1. Pada halaman berikutnya, <u>jangan</u> pilih toption untuk memvektorisasi gambar atau mengekstrak data dengan keterampilan AI.
+1. Pada halaman berikutnya, <u>jangan</u> pilih opsi untuk memvektorisasi gambar atau mengekstrak data dengan keterampilan AI.
 1. Pada halaman berikutnya, aktifkan peringkat semantik dan jadwalkan pengindeks untuk dijalankan sekali.
 1. Pada halaman akhir, atur **Awalan nama objek** ke `margies-index` dan lalu buat indeks.
 
@@ -129,7 +129,7 @@ Sekarang mari kita jelajahi penggunaan data Anda sendiri di aplikasi yang menggu
 2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 
-    > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda untuk memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai penulisnya** pada pop-up tersebut.
+    > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai pembuatnya** di pop-up.
 
 4. Tunggu sementara file tambahan diinstal untuk mendukung proyek kode C# di repositori.
 
@@ -161,7 +161,7 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
     
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - **Nama penyebaran** yang Anda tentukan untuk penyerapan model Anda (tersedia di halaman **Penyebaran** di Azure AI Studio).
+    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di Azure OpenAI Studio).
     - Titik akhir untuk layanan pencarian Anda (nilai **Url** pada halaman gambaran umum untuk sumber daya pencarian Anda di portal Microsoft Azure).
     - **Kunci** untuk sumber daya pencarian Anda (tersedia di halaman **Kunci** untuk sumber daya pencarian Anda di portal Microsoft Azure - Anda dapat menggunakan salah satu kunci admin)
     - Nama indeks pencarian (yang harus `margies-index`).
