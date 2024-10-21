@@ -161,7 +161,7 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
     
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di Azure OpenAI Studio).
+    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model gpt-35-turbo Anda (tersedia di halaman**Penyebaran** di Azure AI Studio).
     - Titik akhir untuk layanan pencarian Anda (nilai **Url** pada halaman gambaran umum untuk sumber daya pencarian Anda di portal Microsoft Azure).
     - **Kunci** untuk sumber daya pencarian Anda (tersedia di halaman **Kunci** untuk sumber daya pencarian Anda di portal Microsoft Azure - Anda dapat menggunakan salah satu kunci admin)
     - Nama indeks pencarian (yang harus `margies-index`).
