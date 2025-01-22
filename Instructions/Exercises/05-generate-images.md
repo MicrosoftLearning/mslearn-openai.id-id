@@ -26,8 +26,8 @@ Sebelum dapat menggunakan Azure OpenAI, Anda harus memprovisikan sumber daya Azu
     > \* model DALL-E 3 hanya tersedia di sumber daya Azure OpenAI Service di wilayah **US Timur** dan **Swedia Tengah**.
 
 1. Tunggu hingga penerapan selesai. Kemudian buka sumber daya Azure OpenAI yang disebarkan di portal Microsoft Azure.
-1. Pada halaman **Ringkasan** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Mulai** dan pilih tombol untuk masuk ke **AI Studio**.
-1. Di Azure OpenAI Studio, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya untuk DALL-E 3, buat penyebaran baru model **dall-e-3** dengan pengaturan berikut:
+1. Pada halaman **Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Memulai** lalu pilih tombol untuk masuk ke **portal AI Foundry** (sebelumnya AI Studio).
+1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya untuk DALL-E 3, buat penyebaran baru model **dall-e-3** dengan pengaturan berikut:
     - **Nama penyebaran**: dalle3
     - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
@@ -38,16 +38,16 @@ Sebelum dapat menggunakan Azure OpenAI, Anda harus memprovisikan sumber daya Azu
 
 ## Menjelajahi pembuatan gambar di playground gambar
 
-Anda dapat menggunakan playground gambar di **Azure AI Studio** untuk bereksperimen dengan pembuatan gambar.
+Anda dapat menggunakan playground Gambar di **portal Azure AI Foundry** untuk bereksperimen dengan pembuatan gambar.
 
 1. Di bagian **Playground gambar**, penyebaran DALL-E 3 Anda harus dipilih secara otomatis. Jika tidak, pilih dari menu dropdown penyebaran.
 1. Dalam kotak **Perintah**, masukkan deskripsi gambar yang ingin Anda hasilkan. Misalnya, `An elephant on a skateboard`. Kemudian, pilih **Hasilkan** dan lihat gambar yang dihasilkan.
 
-    ![Playground Gambar di Azure AI Studio dengan gambar yang dihasilkan.](../media/images-playground.png)
+    ![Playground Gambar di portal Azure AI Foundry dengan gambar yang dihasilkan.](../media/images-playground.png)
 
 1. Ubah perintah untuk memberikan deskripsi yang lebih spesifik. Contoh: `An elephant on a skateboard in the style of Picasso`. Kemudian, hasilkan gambar baru dan tinjau hasilnya.
 
-    ![Playground Gambar di Azure AI Studio dengan dua gambar yang dihasilkan.](../media/images-playground-new-style.png)
+    ![Playground Gambar di portal Azure AI Foundry dengan dua gambar yang dihasilkan.](../media/images-playground-new-style.png)
 
 ## Menggunakan REST API untuk menghasilkan gambar
 

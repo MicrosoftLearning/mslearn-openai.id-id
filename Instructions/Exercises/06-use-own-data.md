@@ -73,10 +73,10 @@ Anda akan menggunakan dua model AI dalam latihan ini:
 - Model penyematan teks untuk *memvektorisasi* teks dalam brosur sehingga dapat diindeks secara efisien untuk digunakan dalam perintah grounding.
 - Model GPT yang dapat digunakan aplikasi Anda untuk menghasilkan respons terhadap perintah yang di-grounded dalam data Anda.
 
-Untuk menyebarkan model ini, Anda akan menggunakan AI Studio.
+Untuk menyebarkan model ini, Anda akan menggunakan AI Foundry.
 
-1. Di portal Azure, navigasikan ke sumber daya Azure OpenAI Anda. Kemudian gunakan tautan untuk membuka sumber daya Anda di **Azure AI Studio**..
-1. Di Azure AI Studio, pada halaman **Penyebaran**, lihat penyebaran model yang sudah ada. Kemudian buat penyebaran model dasar baru dari **model text-embedding-ada-002** dengan pengaturan berikut:
+1. Di portal Azure, navigasikan ke sumber daya Azure OpenAI Anda. Selanjutnya, gunakan tautan untuk membuka sumber daya Anda di **portal Azure AI Foundry**..
+1. Di portal Azure AI Foundry, pada halaman **Penyebaran**, lihat penyebaran model yang sudah ada. Kemudian buat penyebaran model dasar baru dari **model text-embedding-ada-002** dengan pengaturan berikut:
     - **Nama penyebaran**: text-embedding-ada-002
     - **Model**: text-embedding-ada:002
     - **Versi model**: *Gunakan versi default*
@@ -97,7 +97,7 @@ Untuk menyebarkan model ini, Anda akan menggunakan AI Studio.
 
 ## Buat indeks
 
-Untuk memudahkan penggunaan data Anda sendiri dalam perintah, Anda akan mengindeksnya menggunakan Pencarian Azure AI. Anda akan menggunakan mdoel penyematan teks yang Anda sebarkan sebelumnya selama proses pengindeksan untuk *memvektorisasi* data teks (yang menghasilkan setiap token teks dalam indeks yang diwakili oleh vektor numerik - membuatnya kompatibel dengan cara model AI generatif mewakili teks)
+Untuk memudahkan penggunaan data Anda sendiri dalam perintah, Anda akan mengindeksnya menggunakan Pencarian Azure AI. Anda akan menggunakan model penyematan teks yang Anda sebarkan sebelumnya selama proses pengindeksan untuk *memvektorisasi* data teks (yang menghasilkan setiap token teks dalam indeks yang diwakili oleh vektor numerik - membuatnya kompatibel dengan cara model AI generatif mewakili teks)
 
 1. Di portal Azure, navigasikan ke sumber daya Pencarian Azure AI Anda.
 1. Pada halaman **Gambaran Umum**, pilih **Impor dan vektorisasi data**.
@@ -151,7 +151,7 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
     **Python**:
 
     ```
-    pip install openai==1.13.3
+    pip install openai==1.55.3
     ```
 
 3. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa antarmuka pilihan pengguna
@@ -161,7 +161,7 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
     
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model gpt-35-turbo Anda (tersedia di halaman**Penyebaran** di Azure AI Studio).
+    - **Nama penyebaran** yang Anda tentukan untuk penyebaran model gpt-35-turbo Anda (tersedia di halaman**Penyebaran** di portal Azure AI Foundry).
     - Titik akhir untuk layanan pencarian Anda (nilai **Url** pada halaman gambaran umum untuk sumber daya pencarian Anda di portal Microsoft Azure).
     - **Kunci** untuk sumber daya pencarian Anda (tersedia di halaman **Kunci** untuk sumber daya pencarian Anda di portal Microsoft Azure - Anda dapat menggunakan salah satu kunci admin)
     - Nama indeks pencarian (yang harus `margies-index`).
