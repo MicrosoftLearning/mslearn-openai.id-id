@@ -5,7 +5,7 @@ lab:
 
 # Mulai menggunakan layanan Azure OpenAI
 
-Azure OpenAI Service menghadirkan model AI generatif yang dikembangkan oleh OpenAI ke platform Azure, memungkinkan Anda mengembangkan solusi AI canggih yang mendapat manfaat dari keamanan, skalabilitas, dan integrasi layanan yang disediakan oleh platform cloud Azure. Dalam latihan ini, Anda akan mempelajari cara memulai Azure OpenAI dengan menyediakan layanan sebagai sumber daya Azure dan menggunakan Azure AI Studio untuk menyebarkan dan menjelajahi model AI generatif.
+Azure OpenAI Service menghadirkan model AI generatif yang dikembangkan oleh OpenAI ke platform Azure, memungkinkan Anda mengembangkan solusi AI canggih yang mendapat manfaat dari keamanan, skalabilitas, dan integrasi layanan yang disediakan oleh platform cloud Azure. Dalam latihan ini, Anda akan mempelajari cara memulai Azure OpenAI dengan menyediakan layanannya sebagai sumber daya Azure dan menggunakan Azure AI Foundry untuk menyebarkan dan menjelajahi model AI generatif.
 
 Dalam skenario untuk latihan ini, Anda akan melakukan peran pengembang perangkat lunak yang telah ditugaskan untuk menerapkan agen AI yang dapat menggunakan AI generatif untuk membantu organisasi pemasaran meningkatkan efektivitasnya dalam menjangkau pelanggan dan mengiklankan produk baru. Teknik yang digunakan dalam latihan dapat diterapkan pada skenario apa pun di mana organisasi ingin menggunakan model AI generatif untuk membantu karyawan menjadi lebih efektif dan produktif.
 
@@ -39,12 +39,12 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
 
 ## Terapkan model
 
-Azure menyediakan portal berbasis web bernama **Azure AI Studio** yang dapat Anda gunakan untuk menyebarkan, mengelola, dan menjelajahi berbagai model. Anda akan memulai penjelajahan Azure OpenAI dengan menggunakan Azure AI Studio untuk menyebarkan satu model.
+Azure menyediakan portal berbasis web bernama **portal Azure AI Foundry** yang dapat Anda gunakan untuk menerapkan, mengelola, dan menjelajahi berbagai model. Anda akan memulai penjelajahan Azure OpenAI dengan menggunakan portal Azure AI Foundry untuk menerapkan satu model.
 
-> **Catatan**: Saat Anda menggunakan Azure AI Studio, kotak pesan yang menyarankan tugas untuk Anda lakukan dapat ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
+> **Catatan**: Saat Anda menggunakan portal Azure AI Foundry , kotak pesan yang menyarankan tugas untuk Anda lakukan mungkin bisa ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
 
-1. Di portal Azure, pada **halaman Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian  **Memulai** dan pilih tombol untuk masuk ke **AI Studio**.
-1. Di Azure OpenAI Studio, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+1. Di portal Azure, pada halaman **Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Memulai** dan pilih tombol untuk masuk ke **portal AI Foundry** (sebelumnya AI Studio).
+1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
     - **Nama penyebaran**: *Nama unik pilihan Anda*
     - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
     - **Versi model**: *Gunakan versi default*
@@ -57,7 +57,7 @@ Azure menyediakan portal berbasis web bernama **Azure AI Studio** yang dapat And
 
 ## Menggunakan playground Obrolan
 
-Setelah menyebarkan model, Anda dapat menggunakannya untuk menghasilkan respons berdasarkan perintah bahasa alami. Playground *Obrolan* di Azure AI Studio menyediakan antarmuka chatbot untuk model GPT 3.5 dan yang lebih tinggi.
+Setelah menyebarkan model, Anda dapat menggunakannya untuk menghasilkan respons berdasarkan perintah bahasa alami. Playground *Obrolan* di portal Azure AI Foundry menyediakan antarmuka chatbot untuk model GPT 3.5 dan yang lebih tinggi.
 
 > **Catatan:** Playground *Obrolan* menggunakan API *ChatCompletions* daripada API *Penyelesaian* yang lebih lama yang digunakan oleh playground *Penyelesaian*. Playground Penyelesaian disediakan untuk kompatibilitas dengan model yang lebih lama.
 
@@ -135,9 +135,9 @@ Anda telah menjelajahi bagaimana pesan sistem, contoh, dan perintah dapat memban
 
 ## Menyebarkan model Anda ke aplikasi web
 
-Sekarang setelah Anda menjelajahi beberapa kemampuan model AI generatif di playground Azure AI Studio, Anda dapat menyebarkan aplikasi web Azure untuk menyediakan antarmuka agen AI dasar yang dapat digunakan pengguna untuk mengobrol dengan model tersebut.
+Sekarang setelah Anda menjelajahi beberapa kemampuan model AI generatif di playground Azure AI Foundry, Anda dapat menyebarkan aplikasi web Azure untuk menyediakan antarmuka agen AI dasar yang dapat digunakan pengguna untuk mengobrol dengan model tersebut.
 
-> **Catatan**: Azure AI Studio masih dalam pratinjau. Untuk beberapa pengguna, penyebaran ke aplikasi web tidak dapat disebarkan karena bug dalam templat di studio. Jika demikian, lewati bagian ini.
+> **Catatan**: Untuk beberapa pengguna, penyebaran ke aplikasi web tidak dapat disebarkan karena bug dalam templat di studio. Jika demikian, lewati bagian ini.
 
 1. Di kanan atas halaman playground **Obrolan**, pada menu **Sebarkan ke**, pilih **Aplikasi web baru**.
 1. Dalam kotak dialog **Sebarkan ke aplikasi web**, buat aplikasi web baru dengan pengaturan berikut:
@@ -160,7 +160,7 @@ Sekarang setelah Anda menjelajahi beberapa kemampuan model AI generatif di playg
 
     > **Catatan**: Anda menyebarkan *model* ke aplikasi web, tetapi penyebaran ini tidak menyertakan setelan sistem dan parameter yang Anda tetapkan di playground; jadi responsnya mungkin tidak mencerminkan contoh yang Anda berikan di playground. Dalam skenario nyata, Anda akan menambahkan logika ke aplikasi Anda untuk mengubah perintah sehingga mencakup data kontekstual yang sesuai untuk jenis respons yang ingin Anda hasilkan. Penyesuaian semacam ini berada di luar cakupan latihan tingkat pengantar ini, namun Anda dapat mempelajari teknik rekayasa cepat dan API Azure OpenAI dalam latihan lain dan dokumentasi produk.
 
-1. Setelah Anda selesai bereksperimen dengan model di aplikasi web, tutup tab aplikasi web di browser Anda untuk kembali ke Azure AI Studio.
+1. Setelah Anda selesai bereksperimen dengan model Anda di aplikasi web, tutup tab aplikasi web di browser Anda untuk kembali ke portal Azure AI Foundry.
 
 ## Penghapusan
 
