@@ -59,12 +59,12 @@ Azure menyediakan portal berbasis web bernama **portal Azure AI Foundry** yang d
 
 Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playground Obrolan.
 
-1. Di bagian **Playground**, pilih halaman **Obrolan**. Halaman playground **Obrolan** terdiri dari sederet tombol dan dua panel utama (yang dapat disusun dari kanan ke kiri secara horizontal, atau dari atas ke bawah secara vertikal bergantung pada resolusi layar Anda):
-    - **Konfigurasi** - digunakan untuk memilih penyebaran Anda, menentukan pesan sistem, dan mengatur parameter untuk berinteraksi dengan penyebaran Anda.
-    - **sesi Obrolan** - digunakan untuk mengirimkan pesan obrolan dan melihat respons.
-2. Di bawah **Penyebaran**, pastikan bahwa penyebaran model gpt-35-turbo-16k Anda dipilih.
-1. Tinjau **Pesan sistem** default, yang seharusnya *Anda adalah asisten AI yang membantu orang menemukan informasi.*
-4. Dalam**Sesi obrolan**, masukkan kueri berikut:
+1. Pada panel sisi sebelah kiri, di bagian **Playground**, pilih halaman **Obrolan**. Halaman playground **Obrolan** terdiri dari sederet tombol dan dua panel utama (yang dapat disusun dari kanan ke kiri secara horizontal, atau dari atas ke bawah secara vertikal bergantung pada resolusi layar Anda):
+    - **Penyetelan (Setup)** - digunakan untuk memilih penyebaran, menentukan pesan sistem, dan mengatur parameter untuk berinteraksi dengan penyebaran.
+    - **Riwayat Obrolan** - digunakan untuk mengirimkan pesan obrolan dan melihat respons.
+2. Di bagian **Penyebaran**, pastikan bahwa penyebaran model gpt-35-turbo-16k Anda dipilih.
+1. Tinjau pesan sistem default yang terdapat di kotak teks tepat di bawah penyebaran yang dipilih, yang seharusnya *Anda adalah sebuah asisten AI yang membantu orang untuk mencari informasi.*
+4. Pada **Riwayat obrolan**, kirimkan kueri berikut:
 
     ```prompt
     What kind of article is this?
@@ -80,7 +80,7 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 
     Responsnya memberikan deskripsi artikel. Namun, misalkan Anda menginginkan format yang lebih spesifik untuk kategorisasi artikel.
 
-5. Di bagian **Konfigurasi**, ubah pesan sistem menjadi `You are a news aggregator that categorizes news articles.`
+5. Di bagian **Penyiapan**, ubah pesan sistem menjadi `You are a news aggregator that categorizes news articles.`
 
 6. Di bawah pesan sistem baru, pilih tombol **Tambah bagian**, lalu pilih **Contoh**. Kemudian, tambahkan contoh berikut.
 
@@ -127,9 +127,9 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
     Entertainment
     ```
 
-8. Gunakan tombol **Terapkan perubahan** di bagian atas bagian **Konfigurasi** untuk menyimpan perubahan Anda.
+8. Gunakan tombol **Terapkan perubahan** di bagian kotak teks pesan sistem di bagian **Penyetelan (Setup)** untuk menyimpan perubahan Anda.
 
-9. Di bagian **Sesi obrolan**, masukkan ulang perintah berikut:
+9. Di bagian **Riwayat obrolan**, masukkan ulang perintah berikut:
 
     ```prompt
     What kind of article is this?
@@ -147,7 +147,7 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 
 10. Ubah pesan sistem kembali ke templat default, yakni `You are an AI assistant that helps people find information.` tanpa disertai contoh. Setelah itu, terapkan perubahannya.
 
-11. Di bagian **Sesi obrolan**, masukkan ulang perintah berikut:
+11. Di bagian **Riwayat obrolan**, masukkan ulang perintah berikut:
 
     ```prompt
     # 1. Create a list of animals
@@ -359,7 +359,7 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Amati outputnya, dan lihat bagaimana emailnya telah berubah sesuai dengan instruksi yang jelas dari Anda.
@@ -378,7 +378,7 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Amati output. Kali ini Anda mungkin akan melihat email dalam format yang sama, tetapi dengan nada yang jauh lebih informal. Bahkan, Anda mungkin akan melihat lelucon di dalamnya!

@@ -11,6 +11,17 @@ Dalam skenario untuk latihan ini, Anda akan bertindak sebagai pengembang perangk
 
 Latihan ini akan memakan waktu sekitar **30** menit.
 
+## Mengkloning repositori untuk kursus ini
+
+Jika Anda belum melakukannya, Anda harus mengkloning repositori kode untuk kursus ini:
+
+1. Memulai Visual Studio Code.
+2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
+3. Setelah repositori dikloning, buka folder di Visual Studio Code.
+4. Tunggu sementara file tambahan diinstal untuk mendukung proyek kode C# di repositori.
+
+    > **Catatan**: Jika Anda diminta untuk menambahkan aset yang diperlukan guna membangun dan men-debug, pilih **Tidak Sekarang**.
+
 ## Provisi sumber daya Azure OpenAI
 
 Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Azure Anda.
@@ -114,13 +125,8 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
 
     ```csharp
     // Configure the Azure OpenAI client
-       AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
-        ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
-        ChatCompletion completion = chatClient.CompleteChat(
-        [
-        new SystemChatMessage(systemMessage),
-        new UserChatMessage(userMessage),
-        ]);
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
     ```
 
     **Python**: application.py
@@ -140,8 +146,21 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
 
     ```csharp
     // Get response from Azure OpenAI
-    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
+    {
+        Temperature = 0.7f,
+        MaxOutputTokenCount = 800
+    };
 
+    ChatCompletion completion = chatClient.CompleteChat(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(userMessage)
+        ],
+        chatCompletionOptions
+    );
+
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
     ```
 
     **Python**: application.py
