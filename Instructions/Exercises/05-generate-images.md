@@ -43,8 +43,6 @@ Anda dapat menggunakan playground Gambar di **portal Azure AI Foundry** untuk be
 1. Di bagian **Playground gambar**, penyebaran DALL-E 3 Anda harus dipilih secara otomatis. Jika tidak, pilih dari menu dropdown penyebaran.
 1. Dalam kotak **Perintah**, masukkan deskripsi gambar yang ingin Anda hasilkan. Misalnya, `An elephant on a skateboard`. Kemudian, pilih **Hasilkan** dan lihat gambar yang dihasilkan.
 
-    ![Playground Gambar di portal Azure AI Foundry dengan gambar yang dihasilkan.](../media/images-playground.png)
-
 1. Ubah perintah untuk memberikan deskripsi yang lebih spesifik. Contoh: `An elephant on a skateboard in the style of Picasso`. Kemudian, hasilkan gambar baru dan tinjau hasilnya.
 
     ![Playground Gambar di portal Azure AI Foundry dengan dua gambar yang dihasilkan.](../media/images-playground-new-style.png)
