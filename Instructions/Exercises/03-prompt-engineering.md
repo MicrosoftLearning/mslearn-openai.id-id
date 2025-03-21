@@ -1,6 +1,7 @@
 ---
 lab:
   title: Menggunakan rekayasa perintah di aplikasi Anda
+  status: stale
 ---
 
 # Menggunakan rekayasa perintah di aplikasi Anda

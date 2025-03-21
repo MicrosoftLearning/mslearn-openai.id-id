@@ -1,6 +1,7 @@
 ---
 lab:
   title: Membuat gambar dengan model DALL-E
+  status: stale
 ---
 
 # Membuat gambar dengan model DALL-E
