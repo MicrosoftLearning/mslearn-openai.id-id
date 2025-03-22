@@ -1,6 +1,7 @@
 ---
 lab:
   title: Membuat dan meningkatkan kode dengan Azure OpenAI Service
+  status: stale
 ---
 
 # Membuat dan meningkatkan kode dengan Azure OpenAI Service
