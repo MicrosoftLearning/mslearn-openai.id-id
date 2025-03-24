@@ -1,6 +1,7 @@
 ---
 lab:
   title: Menerapkan Retrieval Augmented Generation (RAG) dengan Azure OpenAI Service
+  status: stale
 ---
 
 # Menerapkan Retrieval Augmented Generation (RAG) dengan Azure OpenAI Service

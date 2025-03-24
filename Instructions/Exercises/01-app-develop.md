@@ -1,6 +1,7 @@
 ---
 lab:
   title: Mengembangkan Aplikasi dengan Azure OpenAI Service
+  status: new
 ---
 
 # Mengembangkan Aplikasi dengan Azure OpenAI Service
