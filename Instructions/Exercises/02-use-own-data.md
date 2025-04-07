@@ -74,15 +74,14 @@ Anda akan menggunakan dua model AI dalam latihan ini:
 - Model penyematan teks untuk *memvektorisasi* teks dalam brosur sehingga dapat diindeks secara efisien untuk digunakan dalam perintah grounding.
 - Model GPT yang dapat digunakan aplikasi Anda untuk menghasilkan respons terhadap perintah yang di-grounded dalam data Anda.
 
-
 ## Terapkan model
 
 Selanjutnya, Anda akan menerapkan sumber daya model Azure OpenAI dari CLI. Di portal Azure; pilih ikon **Cloud Shell** dari bilah menu atas dan pastikan terminal Anda diatur ke **Bash**. Mengacu pada contoh ini dan ganti variabel berikut dengan nilai Anda sendiri:
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *your resource group* \
-   -n *your Open AI resource* \
+   -g <your_resource_group> \
+   -n <your_OpenAI_resource> \
    --deployment-name text-embedding-ada-002 \
    --model-name text-embedding-ada-002 \
    --model-version "2"  \
@@ -91,24 +90,21 @@ az cognitiveservices account deployment create \
    --sku-capacity 5
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+> **Catatan**: Kapasitas Sku diukur dalam ribuan token per menit. Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 
-
-Setelah model penyematan teks diterapkan, buat penerapan baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+Setelah model penyematan teks diterapkan, buat penerapan baru model **gpt-4o** dengan pengaturan berikut:
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *your resource group* \
-   -n *your Open AI resource* \
-   --deployment-name gpt-35-turbo-16k \
-   --model-name gpt-35-turbo-16k \
-   --model-version "0125"  \
+   -g <your_resource_group> \
+   -n <your_OpenAI_resource> \
+   --deployment-name gpt-4o \
+   --model-name gpt-4o \
+   --model-version "2024-05-13" \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
 ```
-
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Buat indeks
 
@@ -130,7 +126,7 @@ Untuk memudahkan penggunaan data Anda sendiri dalam perintah, Anda akan menginde
     - **Penyebaran model**: text-embedding-ada-002
     - **Jenis autentikasi**: Kunci API
     - **Saya mengakui bahwa menyambungkan ke layanan Azure OpenAI akan dikenakan biaya tambahan ke akun saya**: Dipilih
-1. Pada halaman berikutnya, <u>jangan</u> pilih opsi untuk memvektorisasi gambar atau mengekstrak data dengan keterampilan AI.
+1. Pada halaman berikutnya, **jangan** pilih opsi untuk memvektorisasi gambar atau mengekstrak data dengan keterampilan AI.
 1. Pada halaman berikutnya, aktifkan peringkat semantik dan jadwalkan pengindeks untuk dijalankan sekali.
 1. Pada halaman akhir, atur **Awalan nama objek** ke `margies-index` dan lalu buat indeks.
 
@@ -141,7 +137,7 @@ Sekarang mari kita jelajahi penggunaan data Anda sendiri di aplikasi yang menggu
 > **Tips**: Jika Anda telah membuat klon repositori **mslearn-openai**, buka klon tersebut di Visual Studio Code. Atau, ikuti langkah-langkah ini untuk mengkloningnya ke lingkungan pengembangan Anda.
 
 1. Memulai Visual Studio Code.
-2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
+2. Buka palet (SHIFT+CTRL+P) atau **Lihat** > **Palet Perintah...**) dan jalankan perintah **Git: Clone** untuk mengkloning `https://github.com/MicrosoftLearning/mslearn-openai`repositori ke folder lokal (folder mana pun tidak masalah).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 
     > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai pembuatnya** di pop-up.
@@ -159,24 +155,25 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.17
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
+    dotnet add package Azure.Search.Documents --version 11.6.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.54.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa antarmuka pilihan pengguna
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
-    - **Nama penyebaran** yang Anda tentukan untuk penerapan model gpt-35-turbo Anda (harus `gpt-35-turbo-16k`.
+    - **Nama penyebaran** yang Anda tentukan untuk penerapan model gpt-4o Anda (harus `gpt-4o`.
     - Titik akhir untuk layanan pencarian Anda (nilai **Url** pada halaman gambaran umum untuk sumber daya pencarian Anda di portal Microsoft Azure).
     - **Kunci** untuk sumber daya pencarian Anda (tersedia di halaman **Kunci** untuk sumber daya pencarian Anda di portal Microsoft Azure - Anda dapat menggunakan salah satu kunci admin)
     - Nama indeks pencarian (yang harus `margies-index`).
@@ -186,55 +183,62 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
 
 Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang Anda sebarkan.
 
-1. Di panel **Penjelajah**, di folder **CSharp** atau **Python**, buka file kode untuk bahasa pilihan Anda, dan ganti komentar ***Konfigurasikan sumber data Anda*** dengan kode untuk menambahkan pustaka Azure OpenAI SDK:
+1. Di panel **Penjelajah**, di folder **CSharp** atau folder **Python**, buka file kode untuk bahasa pilihan Anda, dan ganti komentar ***Konfigurasikan sumber data Anda*** dengan kode ke indeks Anda sebagai sumber data untuk penyelesaian obrolan:
 
     **C#**: ownData.cs
 
     ```csharp
     // Configure your data source
-    AzureSearchChatExtensionConfiguration ownDataConfig = new()
+    // Extension methods to use data sources with options are subject to SDK surface changes. Suppress the warning to acknowledge this and use the subject-to-change AddDataSource method.
+    #pragma warning disable AOAI001
+    
+    ChatCompletionOptions chatCompletionsOptions = new ChatCompletionOptions()
     {
-            SearchEndpoint = new Uri(azureSearchEndpoint),
-            Authentication = new OnYourDataApiKeyAuthenticationOptions(azureSearchKey),
-            IndexName = azureSearchIndex
+        MaxOutputTokenCount = 600,
+        Temperature = 0.9f,
     };
+    
+    chatCompletionsOptions.AddDataSource(new AzureSearchChatDataSource()
+    {
+        Endpoint = new Uri(azureSearchEndpoint),
+        IndexName = azureSearchIndex,
+        Authentication = DataSourceAuthentication.FromApiKey(azureSearchKey),
+    });
     ```
 
     **Python**: ownData.py
 
     ```python
-# Configure your data source
-text = input('\nEnter a question:\n')
-
-completion = client.chat.completions.create(
-    model=deployment,
-    messages=[
-        {
-            "role": "user",
-            "content": text,
-        },
-    ],
-    extra_body={
-        "data_sources":[
+    # Configure your data source
+    text = input('\nEnter a question:\n')
+    
+    completion = client.chat.completions.create(
+        model=deployment,
+        messages=[
             {
-                "type": "azure_search",
-                "parameters": {
-                    "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
-                    "index_name": os.environ["AZURE_SEARCH_INDEX"],
-                    "authentication": {
-                        "type": "api_key",
-                        "key": os.environ["AZURE_SEARCH_KEY"],
+                "role": "user",
+                "content": text,
+            },
+        ],
+        extra_body={
+            "data_sources":[
+                {
+                    "type": "azure_search",
+                    "parameters": {
+                        "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
+                        "index_name": os.environ["AZURE_SEARCH_INDEX"],
+                        "authentication": {
+                            "type": "api_key",
+                            "key": os.environ["AZURE_SEARCH_KEY"],
+                        }
                     }
                 }
-            }
-        ],
-    }
-)
+            ],
+        }
+    )
     ```
 
-2. Tinjau kode lainnya, dengan mencatat penggunaan *ekstensi* dalam isi permintaan yang digunakan untuk memberikan informasi tentang pengaturan sumber data.
-
-3. Simpan perubahan terhadap file kode.
+1. Simpan perubahan terhadap file kode.
 
 ## Jalankan aplikasi Anda
 

@@ -45,9 +45,9 @@ Azure menyediakan portal berbasis web bernama **portal Azure AI Foundry** yang d
 > **Catatan**: Saat Anda menggunakan portal Azure AI Foundry , kotak pesan yang menyarankan tugas untuk Anda lakukan mungkin bisa ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
 
 1. Di portal Azure, pada halaman **Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Memulai** dan pilih tombol untuk masuk ke **portal AI Foundry** (sebelumnya AI Studio).
-1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-4o** dengan pengaturan berikut:
     - **Nama penyebaran**: *Nama unik pilihan Anda*
-    - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
+    - **Model**: gpt-4o
     - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
     - **Batas tarif token per menit**: 5K\*
@@ -63,9 +63,9 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 1. Pada panel sisi sebelah kiri, di bagian **Playground**, pilih halaman **Obrolan**. Halaman playground **Obrolan** terdiri dari sederet tombol dan dua panel utama (yang dapat disusun dari kanan ke kiri secara horizontal, atau dari atas ke bawah secara vertikal bergantung pada resolusi layar Anda):
     - **Penyetelan (Setup)** - digunakan untuk memilih penyebaran, menentukan pesan sistem, dan mengatur parameter untuk berinteraksi dengan penyebaran.
     - **Riwayat Obrolan** - digunakan untuk mengirimkan pesan obrolan dan melihat respons.
-2. Di bagian **Penyebaran**, pastikan bahwa penyebaran model gpt-35-turbo-16k Anda dipilih.
+1. Di bagian **Penyebaran**, pastikan bahwa penyebaran model gpt-4o Anda dipilih.
 1. Tinjau pesan sistem default yang terdapat di kotak teks tepat di bawah penyebaran yang dipilih, yang seharusnya *Anda adalah sebuah asisten AI yang membantu orang untuk mencari informasi.*
-4. Pada **Riwayat obrolan**, kirimkan kueri berikut:
+1. Pada **Riwayat obrolan**, kirimkan kueri berikut:
 
     ```prompt
     What kind of article is this?
@@ -81,12 +81,12 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 
     Responsnya memberikan deskripsi artikel. Namun, misalkan Anda menginginkan format yang lebih spesifik untuk kategorisasi artikel.
 
-5. Di bagian **Penyiapan**, ubah pesan sistem menjadi `You are a news aggregator that categorizes news articles.`
+1. Di bagian **Penyiapan**, ubah pesan sistem menjadi `You are a news aggregator that categorizes news articles.`
 
-6. Di bawah pesan sistem baru, pilih tombol **Tambah bagian**, lalu pilih **Contoh**. Kemudian, tambahkan contoh berikut.
+1. Di bawah pesan sistem baru, pilih tombol **Tambah bagian**, lalu pilih **Contoh**. Kemudian, tambahkan contoh berikut.
 
     **Pengguna:**
-    
+
     ```prompt
     What kind of article is this?
     ---
@@ -98,17 +98,17 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
     
     The Chicago Cyclones' two hits came in the 2nd and the 5th innings but were unable to get the runner home to score.
     ```
-    
+
     **Asisten:**
-    
+
     ```prompt
     Sports
       ```
 
-7. Tambahkan contoh lain dengan teks berikut.
+1. Tambahkan contoh lain dengan teks berikut.
 
     **Pengguna:**
-    
+
     ```prompt
     Categorize this article:
     ---
@@ -121,16 +121,16 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
     
     From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
-    
+
     **Asisten:**
-    
+
     ```prompt
     Entertainment
     ```
 
-8. Gunakan tombol **Terapkan perubahan** di bagian kotak teks pesan sistem di bagian **Penyetelan (Setup)** untuk menyimpan perubahan Anda.
+1. Gunakan tombol **Terapkan perubahan** di bagian kotak teks pesan sistem di bagian **Penyetelan (Setup)** untuk menyimpan perubahan Anda.
 
-9. Di bagian **Riwayat obrolan**, masukkan ulang perintah berikut:
+1. Di bagian **Riwayat obrolan**, masukkan ulang perintah berikut:
 
     ```prompt
     What kind of article is this?
@@ -146,9 +146,9 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 
     Kombinasi pesan sistem yang lebih spesifik serta beberapa contoh kueri dan respons yang diharapkan akan menghasilkan format yang konsisten untuk hasilnya.
 
-10. Ubah pesan sistem kembali ke templat default, yakni `You are an AI assistant that helps people find information.` tanpa disertai contoh. Setelah itu, terapkan perubahannya.
+1. Ubah pesan sistem kembali ke templat default, yakni `You are an AI assistant that helps people find information.` tanpa disertai contoh. Setelah itu, terapkan perubahannya.
 
-11. Di bagian **Riwayat obrolan**, masukkan ulang perintah berikut:
+1. Di bagian **Riwayat obrolan**, masukkan ulang perintah berikut:
 
     ```prompt
     # 1. Create a list of animals
@@ -158,10 +158,10 @@ Mari kita mulai dengan menjelajahi beberapa teknik rekayasa perintah di playgrou
 
     Untuk memenuhi perintah, model kemungkinan akan merespons dengan jawaban, yang dibagi menjadi daftar bernomor. Ini adalah respons yang tepat, tetapi bagaimana jika Anda sebenarnya ingin agar model menulis program Python yang melakukan tugas yang sudah jelaskan?
 
-12. Ubah pesan sistem menjadi `You are a coding assistant helping write python code.` dan terapkan perubahannya.
-13. Masukkan ulang perintah berikut ke model:
+1. Ubah pesan sistem menjadi `You are a coding assistant helping write python code.` dan terapkan perubahannya.
+1. Masukkan ulang perintah berikut ke model:
 
-    ```
+    ```prompt
     # 1. Create a list of animals
     # 2. Create a list of whimsical names for those animals
     # 3. Combine them randomly into a list of 25 animal and name pairs
@@ -176,7 +176,7 @@ Sekarang mari kita jelajahi rekayasa perintah di aplikasi yang menggunakan Azure
 > **Tips**: Jika Anda telah membuat klon repositori **mslearn-openai**, buka klon tersebut di Visual Studio Code. Atau, ikuti langkah-langkah ini untuk mengkloningnya ke lingkungan pengembangan Anda.
 
 1. Memulai Visual Studio Code.
-2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
+2. Buka palet (SHIFT+CTRL+P) atau **Lihat** > **Palet Perintah...**) dan jalankan perintah **Git: Clone** untuk mengkloning `https://github.com/MicrosoftLearning/mslearn-openai`repositori ke folder lokal (folder mana pun tidak masalah).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 
     > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai pembuatnya** di pop-up.
@@ -194,21 +194,21 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa antarmuka pilihan pengguna
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
     - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di portal Azure AI Foundry).
@@ -225,6 +225,7 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
     ```csharp
     // Add Azure OpenAI package
     using Azure.AI.OpenAI;
+    using OpenAI.Chat;
     ```
 
     **Python**: prompt-engineering.py
@@ -240,7 +241,8 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
 
     ```csharp
     // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
     ```
 
     **Python**: prompt-engineering.py
@@ -260,20 +262,19 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+    var chatCompletionsOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemMessage),
-            new ChatRequestUserMessage(userMessage)
-        },
         Temperature = 0.7f,
-        MaxTokens = 800,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
     
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+    ChatCompletion response = await chatClient.CompleteChatAsync(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(userMessage),
+        ],
+        chatCompletionsOptions);
     ```
 
     **Python**: prompt-engineering.py

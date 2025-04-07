@@ -45,9 +45,9 @@ Azure menyediakan portal berbasis web bernama **portal Azure AI Foundry** yang d
 > **Catatan**: Saat Anda menggunakan portal Azure AI Foundry , kotak pesan yang menyarankan tugas untuk Anda lakukan mungkin bisa ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
 
 1. Di portal Azure, pada halaman **Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Memulai** dan pilih tombol untuk masuk ke **portal AI Foundry** (sebelumnya AI Studio).
-1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-4o** dengan pengaturan berikut:
     - **Nama penyebaran**: *Nama unik pilihan Anda*
-    - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
+    - **Model**: gpt-4o
     - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
     - **Batas tarif token per menit**: 5K\*
@@ -67,7 +67,7 @@ Sebelum menggunakan di aplikasi Anda, periksa bagaimana Azure OpenAI dapat mengh
 1. Di area **Pesan sistem**, atur pesan sistem ke `You are a programming assistant helping write code` dan terapkan perubahannya.
 1. Dalam**Sesi obrolan**, masukkan kueri berikut:
 
-    ```
+    ```prompt
     Write a function in python that takes a character and a string as input, and returns how many times the character appears in the string
     ```
 
@@ -79,7 +79,7 @@ Sebelum menggunakan di aplikasi Anda, periksa bagaimana Azure OpenAI dapat mengh
 
 1. Selanjutnya, mari kita jelajahi menggunakan AI untuk memahami kode. Kirim perintah berikut sebagai pesan pengguna.
 
-    ```
+    ```prompt
     What does the following function do?  
     ---  
     def multiply(a, b):  
@@ -105,11 +105,11 @@ Sebelum menggunakan di aplikasi Anda, periksa bagaimana Azure OpenAI dapat mengh
 
     Model harus menjelaskan apa yang dilakukan fungsi, yaitu mengalikan dua angka bersama-sama dengan menggunakan perulangan.
 
-7. Masukkan perintah `Can you simplify the function?`.
+1. Masukkan perintah `Can you simplify the function?`.
 
     Model harus menulis versi fungsi yang lebih sederhana.
 
-8. Masukkan perintah: `Add some comments to the function.`
+1. Masukkan perintah: `Add some comments to the function.`
 
     Model menambahkan komentar ke kode.
 
@@ -120,7 +120,7 @@ Sekarang mari kita jelajahi bagaimana Anda dapat membuat aplikasi kustom yang me
 > **Tips**: Jika Anda telah membuat klon repositori **mslearn-openai**, buka klon tersebut di Visual Studio Code. Atau, ikuti langkah-langkah ini untuk mengkloningnya ke lingkungan pengembangan Anda.
 
 1. Memulai Visual Studio Code.
-2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
+2. Buka palet perintah (SHIFT+CTRL+P) atau **Lihat** > ** palet perintah...**) lalu jalankan perintah **Git: Clone** untuk mengkloning `https://github.com/MicrosoftLearning/mslearn-openai`repositori ke folder lokal (tidak masalah folder mana pun).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 
     > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai pembuatnya** di pop-up.
@@ -138,21 +138,21 @@ Aplikasi untuk C# dan Python telah disediakan, beserta contoh file teks yang aka
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa antarmuka pilihan pengguna
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
     - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di portal Azure AI Foundry).
@@ -168,23 +168,19 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+    var chatCompletionsOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemPrompt),
-            new ChatRequestUserMessage(userPrompt)
-        },
         Temperature = 0.7f,
-        MaxTokens = 1000,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
-
+    
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
-
-    ChatCompletions completions = response.Value;
-    string completion = completions.Choices[0].Message.Content;
+    ChatCompletion response = await chatClient.CompleteChatAsync(
+        [
+            new SystemChatMessage(systemPrompt),
+            new UserChatMessage(userPrompt),
+        ],
+        chatCompletionsOptions);
     ```
 
     **Python**: code-generation.py
@@ -205,7 +201,7 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
     )
     ```
 
-4. Simpan perubahan terhadap file kode.
+1. Simpan perubahan terhadap file kode.
 
 ## Jalankan aplikasi
 
@@ -249,7 +245,7 @@ Setelah aplikasi Anda dikonfigurasi, jalankan untuk mencoba membuat kode untuk s
     - **Python**: Perbaikan dibuat pada baris 18 dan 31
 
     Aplikasi untuk Go Fish di **sample-code** dapat dijalankan jika Anda mengganti baris yang berisi bug dengan respons dari Azure OpenAI. Jika Anda menjalankannya tanpa perbaikan, itu tidak akan berfungsi dengan benar.
-    
+
     > **Catatan**: Penting untuk dicatat bahwa meskipun kode untuk aplikasi Go Fish ini diperbaiki untuk beberapa sintaks, itu bukan representasi yang benar-benar akurat dari game. Jika Anda melihat lebih dekat, ada masalah dengan tidak memeriksa apakah dek kosong saat menggambar kartu, tidak menghapus pasangan dari tangan pemain ketika mereka mendapatkan pasangan, dan beberapa bug lain yang memerlukan pemahaman tentang permainan kartu untuk diwujudkan. Ini adalah contoh yang bagus tentang bagaimana model AI generatif yang berguna dapat membantu pembuatan kode, tetapi tidak dapat dipercaya sebagai benar dan perlu diverifikasi oleh pengembang.
 
     Jika ingin melihat respons lengkap dari Azure OpenAI, Anda dapat mengatur variabel **printFullResponse** ke `True`, lalu menjalankan ulang aplikasi.

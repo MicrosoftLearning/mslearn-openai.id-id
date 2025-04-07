@@ -45,9 +45,9 @@ Azure menyediakan portal berbasis web bernama **portal Azure AI Foundry** yang d
 > **Catatan**: Saat Anda menggunakan portal Azure AI Foundry , kotak pesan yang menyarankan tugas untuk Anda lakukan mungkin bisa ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
 
 1. Di portal Azure, pada halaman **Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Memulai** dan pilih tombol untuk masuk ke **portal AI Foundry** (sebelumnya AI Studio).
-1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-4o** dengan pengaturan berikut:
     - **Nama penyebaran**: *Nama unik pilihan Anda*
-    - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
+    - **Model**: gpt-4o
     - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
     - **Batas tarif token per menit**: 5K\*
@@ -58,14 +58,14 @@ Azure menyediakan portal berbasis web bernama **portal Azure AI Foundry** yang d
 
 ## Menggunakan playground Obrolan
 
-Setelah menyebarkan model, Anda dapat menggunakannya untuk menghasilkan respons berdasarkan perintah bahasa alami. Playground *Obrolan* di portal Azure AI Foundry menyediakan antarmuka chatbot untuk model GPT 3.5 dan yang lebih tinggi.
+Setelah menyebarkan model, Anda dapat menggunakannya untuk menghasilkan respons berdasarkan perintah bahasa alami. Area bermain *Obrolan* di portal Azure AI Foundry menyediakan antarmuka chatbot untuk model GPT 4 dan yang lebih tinggi.
 
 > **Catatan:** Playground *Obrolan* menggunakan API *ChatCompletions* daripada API *Penyelesaian* yang lebih lama yang digunakan oleh playground *Penyelesaian*. Playground Penyelesaian disediakan untuk kompatibilitas dengan model yang lebih lama.
 
 1. Di bagian **Playground**, pilih halaman **Obrolan**. Halaman playground **Obrolan** terdiri dari sederet tombol dan dua panel utama (yang dapat disusun dari kanan ke kiri secara horizontal, atau dari atas ke bawah secara vertikal bergantung pada resolusi layar Anda):
     - **Konfigurasi** - digunakan untuk memilih penyebaran Anda, menentukan pesan sistem, dan mengatur parameter untuk berinteraksi dengan penyebaran Anda.
     - **sesi Obrolan** - digunakan untuk mengirimkan pesan obrolan dan melihat respons.
-1. Di bawah **Penyebaran**, pastikan bahwa penyebaran model gpt-35-turbo-16k Anda dipilih.
+1. Di bagian **Penyebaran**, pastikan bahwa penyebaran model gpt-4o Anda dipilih.
 1. Tinjau **Pesan sistem** default, yang seharusnya *Anda adalah asisten AI yang membantu orang menemukan informasi.* Pesan sistem disertakan dalam perintah yang dikirimkan ke model, dan menyediakan konteks untuk respons model; menetapkan ekspektasi tentang bagaimana agen AI berdasarkan model harus berinteraksi dengan pengguna.
 1. Di panel **Sesi obrolan**, masukkan kueri pengguna `How can I use generative AI to help me market a new product?`
 
@@ -96,13 +96,13 @@ Sejauh ini, Anda telah terlibat dalam percakapan obrolan dengan model Anda berda
 1. Di bawah kotak teks **Pesan sistem**, perluas menu dropdown untuk **Tambahkan bagian** dan pilih **Contoh**. Kemudian ketik pesan dan respons berikut di kotak yang ditentukan:
 
     **Pengguna:**
-    
+
     ```prompt
     Write an advertisement for the lightweight "Ultramop" mop, which uses patented absorbent materials to clean floors.
     ```
-    
+
     **Asisten**:
-    
+
     ```prompt
     Welcome to the future of cleaning!
     
@@ -147,7 +147,7 @@ Sekarang setelah Anda menjelajahi beberapa kemampuan model AI generatif di playg
     - **Grup sumber daya**: *Grup sumber daya tempat Anda menyediakan sumber daya Azure OpenAI*
     - **Locations**: *Wilayah tempat Anda menyediakan sumber daya Azure OpenAI*
     - **Paket harga**: Gratis (F1) - *Jika tidak tersedia, pilih Dasar (B1)*
-    - **Aktifkan riwayat obrolan di aplikasi web**: <u>Satu</u> dipilih
+    - **Aktifkan riwayat obrolan di aplikasi web**: **Satu** dipilih
     - **Saya menyetujui bahwa aplikasi web akan dikenakan penggunaan pada akun saya**: Dipilih
 1. Sebarkan aplikasi web baru dan tunggu hingga penyebaran selesai (mungkin memerlukan waktu sekitar 10 menit)
 1. Setelah aplikasi web Anda berhasil disebarkan, gunakan tombol di kanan atas halaman playground **Obrolan** untuk meluncurkan aplikasi web. Aplikasi mungkin memerlukan waktu beberapa menit untuk diluncurkan. Jika diminta, terima permintaan izin.
