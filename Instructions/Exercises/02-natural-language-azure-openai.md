@@ -45,9 +45,9 @@ Azure menyediakan portal berbasis web bernama **portal Azure AI Foundry** yang d
 > **Catatan**: Saat Anda menggunakan portal Azure AI Foundry , kotak pesan yang menyarankan tugas untuk Anda lakukan mungkin bisa ditampilkan. Anda dapat menutup ini dan mengikuti langkah-langkah dalam latihan ini.
 
 1. Di portal Azure, pada halaman **Ikhtisar** untuk sumber daya Azure OpenAI Anda, gulir ke bawah ke bagian **Memulai** dan pilih tombol untuk masuk ke **portal AI Foundry** (sebelumnya AI Studio).
-1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-35-turbo-16k** dengan pengaturan berikut:
+1. Di portal Azure AI Foundry, di panel sebelah kiri, pilih halaman **Penyebaran** dan lihat penyebaran model yang sudah ada. Jika Anda belum memilikinya, buat penyebaran baru model **gpt-4o** dengan pengaturan berikut:
     - **Nama penyebaran**: *Nama unik pilihan Anda*
-    - **Model**: gpt-35-turbo-16k *(jika model 16k tidak tersedia, pilih gpt-35-turbo)*
+    - **Model**: gpt-4o
     - **Versi model**: *Gunakan versi default*
     - **Tipe penyebaran**: Standar
     - **Batas tarif token per menit**: 5K\*
@@ -63,7 +63,7 @@ Anda akan mengembangkan aplikasi Azure OpenAI menggunakan Visual Studio Code. Fi
 > **Tips**: Jika Anda telah membuat klon repositori **mslearn-openai**, buka klon tersebut di Visual Studio Code. Atau, ikuti langkah-langkah ini untuk mengkloningnya ke lingkungan pengembangan Anda.
 
 1. Memulai Visual Studio Code.
-2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
+2. Buka palet perintah (SHIFT+CTRL+P) atau **Lihat** > ** palet perintah...**) lalu jalankan perintah **Git: Clone** untuk mengkloning `https://github.com/MicrosoftLearning/mslearn-openai`repositori ke folder lokal (tidak masalah folder mana pun).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 
     > **Catatan**: Jika Visual Studio Code menampilkan pesan pop-up yang meminta Anda memercayai kode yang Anda buka, klik opsi **Ya, saya memercayai pembuatnya** di pop-up.
@@ -81,21 +81,21 @@ Aplikasi untuk C# dan Python telah disediakan. Kedua aplikasi memiliki fungsiona
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa antarmuka pilihan pengguna
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
     - **Nama penyebaran** yang Anda tentukan untuk penyebaran model Anda (tersedia di halaman**Penyebaran** di portal Azure AI Foundry).
@@ -110,12 +110,13 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
     **C#**: Program.cs
 
     ```csharp
-    // Add Azure OpenAI package
+    // Add Azure OpenAI packages
     using Azure.AI.OpenAI;
+    using OpenAI.Chat;
     ```
-    
+
     **Python**: test-openai-model.py
-    
+
     ```python
     # Add Azure OpenAI package
     from openai import AzureOpenAI
@@ -127,7 +128,8 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
 
     ```csharp
     // Initialize the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
     
     // System message to provide context to the model
     string systemMessage = "I am a hiking enthusiast named Forest who helps people discover hikes in their area. If no area is specified, I will default to near Rainier National Park. I will then provide three suggestions for nearby hikes that vary in length. I will also share an interesting fact about the local nature on the hikes when making a recommendation.";
@@ -151,31 +153,28 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
         """
     ```
 
-1. Ganti komentar ***Tambahkan kode untuk mengirim permintaan...*** dengan kode yang diperlukan untuk membangun permintaan; menentukan berbagai parameter untuk model Anda seperti `messages` dan `temperature`.
+1. Ganti komentar ***Tambahkan kode untuk mengirim permintaan...*** dengan kode yang diperlukan untuk membangun permintaan; menentukan berbagai parameter untuk model Anda seperti `Temperature` dan `MaxOutputTokenCount`.
 
     **C#**: Program.cs
 
     ```csharp
     // Add code to send request...
-    // Build completion options object
-    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
+    // Get response from Azure OpenAI
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemMessage),
-            new ChatRequestUserMessage(inputText),
-        },
-        MaxTokens = 400,
         Temperature = 0.7f,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
 
-    // Send request to Azure OpenAI model
-    ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
+    ChatCompletion completion = chatClient.CompleteChat(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(inputText)
+        ],
+        chatCompletionOptions
+    );
 
-    // Print the response
-    string completion = response.Choices[0].Message.Content;
-    Console.WriteLine("Response: " + completion + "\n");
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
     ```
 
     **Python**: test-openai-model.py
@@ -232,9 +231,9 @@ Di sebagian besar aplikasi dunia nyata, kemampuan untuk mereferensikan bagian pe
 
     ```csharp
     // Initialize messages list
-    var messagesList = new List<ChatRequestMessage>()
+    var messagesList = new List<ChatMessage>()
     {
-        new ChatRequestSystemMessage(systemMessage),
+        new SystemChatMessage(systemMessage),
     };
     ```
 
@@ -252,31 +251,26 @@ Di sebagian besar aplikasi dunia nyata, kemampuan untuk mereferensikan bagian pe
     ```csharp
     // Add code to send request...
     // Build completion options object
-    messagesList.Add(new ChatRequestUserMessage(inputText));
+    messagesList.Add(new UserChatMessage(inputText));
 
-    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
     {
-        MaxTokens = 1200,
         Temperature = 0.7f,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
 
-    // Add messages to the completion options
-    foreach (ChatRequestMessage chatMessage in messagesList)
-    {
-        chatCompletionsOptions.Messages.Add(chatMessage);
-    }
-
-    // Send request to Azure OpenAI model
-    ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
+    ChatCompletion completion = chatClient.CompleteChat(
+        messagesList,
+        chatCompletionOptions
+    );
 
     // Return the response
-    string completion = response.Choices[0].Message.Content;
+    string response = completion.Content[0].Text;
 
     // Add generated text to messages list
-    messagesList.Add(new ChatRequestAssistantMessage(completion));
+    messagesList.Add(new AssistantChatMessage(response));
 
-    Console.WriteLine("Response: " + completion + "\n");
+    Console.WriteLine("Response: " + response + "\n");
     ```
 
     **Python**: test-openai-model.py
@@ -310,7 +304,7 @@ Di sebagian besar aplikasi dunia nyata, kemampuan untuk mereferensikan bagian pe
 1. Amati output, lalu berikan perintah `How difficult is the second hike you suggested?`.
 1. Anda kemungkinan akan mendapatkan respons tentang pendakian kedua yang disarankan model, yang menyediakan percakapan yang jauh lebih realistis. Anda dapat mengajukan pertanyaan tindak lanjut tambahan yang mereferensikan jawaban sebelumnya, dan setiap kali riwayat menyediakan konteks untuk dijawab oleh model.
 
-    > **Tips**: Jumlah token hanya diatur ke 1200, jadi jika percakapan berlanjut terlalu lama, aplikasi akan kehabisan token yang tersedia, menghasilkan permintaan yang tidak lengkap. Dalam penggunaan produksi, membatasi panjang riwayat ke input dan respons terbaru akan membantu mengontrol jumlah token yang diperlukan.
+    > **Tips**: Jumlah token hanya diatur ke 800, jadi jika percakapan berlanjut terlalu lama, aplikasi akan kehabisan token yang tersedia, menghasilkan prompt yang tidak lengkap. Dalam penggunaan produksi, membatasi panjang riwayat ke input dan respons terbaru akan membantu mengontrol jumlah token yang diperlukan.
 
 ## Penghapusan
 

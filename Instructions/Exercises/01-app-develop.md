@@ -17,7 +17,7 @@ Latihan ini akan memakan waktu sekitar **30** menit.
 Jika Anda belum melakukannya, Anda harus mengkloning repositori kode untuk kursus ini:
 
 1. Memulai Visual Studio Code.
-2. Buka palet (SHIFT+CTRL+P) dan jalankan **Git: Perintah klon** untuk mengkloning repositori `https://github.com/MicrosoftLearning/mslearn-openai` ke folder lokal (tidak masalah folder mana).
+2. Buka palet perintah (SHIFT+CTRL+P) atau **Lihat** > ** palet perintah...**) lalu jalankan perintah **Git: Clone** untuk mengkloning `https://github.com/MicrosoftLearning/mslearn-openai`repositori ke folder lokal (tidak masalah folder mana pun).
 3. Setelah repositori dikloning, buka folder di Visual Studio Code.
 4. Tunggu sementara file tambahan diinstal untuk mendukung proyek kode C# di repositori.
 
@@ -47,7 +47,7 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
 
     > \* Sumber daya Azure OpenAI dibatasi oleh kuota regional. Wilayah yang tercantum mencakup kuota default untuk tipe model yang digunakan dalam latihan ini. Memilih wilayah secara acak akan mengurangi risiko satu wilayah mencapai batas kuota dalam skenario di mana Anda berbagi langganan dengan pengguna lain. Jika batas kuota tercapai di akhir latihan, Anda mungkin perlu membuat sumber daya lain di wilayah yang berbeda.
 
-3. Tunggu hingga penerapan selesai. Kemudian buka sumber daya Azure OpenAI yang disebarkan di portal Microsoft Azure.
+1. Tunggu hingga penerapan selesai. Kemudian buka sumber daya Azure OpenAI yang disebarkan di portal Microsoft Azure.
 
 ## Terapkan model
 
@@ -55,20 +55,17 @@ Selanjutnya, Anda akan menerapkan sumber daya model Azure OpenAI dari CLI. Lihat
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *Your resource group* \
-   -n *Name of your OpenAI service* \
-   --deployment-name gpt-35-turbo \
-   --model-name gpt-35-turbo \
-   --model-version 0125  \
+   -g <your_resource_group> \
+   -n <your_OpenAI_service> \
+   --deployment-name gpt-4o \
+   --model-name gpt-4o \
+   --model-version 2024-05-13 \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
-
-> [!NOTE]
-> Jika Anda melihat peringatan tentang kerangka kerja net7.0 yang sudah tidak didukung, Anda dapat mengabaikannya untuk latihan ini.
+> **Catatan**: Kapasitas Sku diukur dalam ribuan token per menit. Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 
 ## Mengonfigurasi aplikasi Anda
 
@@ -79,21 +76,21 @@ Aplikasi untuk C# dan Python telah disediakan, dan kedua aplikasi memiliki fungs
 
     **C#**:
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 2.0.0
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.54.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. Pada panel **Explorer**, di folder **CSharp** atau **Python**, buka file konfigurasi untuk bahasa antarmuka pilihan pengguna
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Perbarui nilai konfigurasi untuk menyertakan:
     - **Titik akhir** dan **kunci** dari sumber daya Azure OpenAI yang Anda buat (tersedia di halaman **Kunci dan Titik Akhir** untuk sumber daya Azure OpenAI Anda di portal Microsoft Azure)
     - **Nama penerapan** yang Anda tentukan untuk penerapan model Anda.
@@ -138,7 +135,7 @@ Sekarang Anda siap menggunakan Azure OpenAI SDK untuk menggunakan model yang And
         azure_endpoint = azure_oai_endpoint, 
         api_key=azure_oai_key,  
         api_version="2024-02-15-preview"
-        )
+    )
     ```
 
 3. Dalam fungsi yang memanggil model Azure OpenAI, di bagian komentar ***Dapatkan respons dari Azure OpenAI***, tambahkan kode untuk memformat dan mengirimkan permintaan ke model.
@@ -271,28 +268,112 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     ```
 
 1. Amati output. Kali ini Anda mungkin akan melihat email dalam format yang sama, tetapi dengan nada yang jauh lebih informal. Bahkan, Anda mungkin akan melihat lelucon di dalamnya!
-1. Untuk iterasi akhir, kami akan sedikit menyimpang dari pembuatan email dan mencoba *konteks grounding*. Di sini, Anda akan memberikan pesan sistem sederhana, dan mengubah aplikasi untuk memberikan konteks grounding sebagai awal perintah pengguna. Aplikasi kemudian akan menambahkan input pengguna, dan mengekstrak informasi dari konteks grounding untuk menjawab perintah pengguna kami.
+
+## Gunakan konteks dasar dan mempertahankan riwayat obrolan
+
+1. Untuk iterasi akhir, kami akan sedikit menyimpang dari pembuatan email dan mengeksplorasi *konteks dasar* serta memelihara riwayat obrolan. Di sini, Anda akan memberikan pesan sistem sederhana, dan mengubah aplikasi untuk memberikan konteks dasar sebagai awal riwayat pengguna. Aplikasi kemudian akan menambahkan input pengguna, dan mengekstrak informasi dari konteks grounding untuk menjawab perintah pengguna kami.
 1. Buka file `grounding.txt` dan baca secara singkat konteks grounding yang akan Anda sisipkan.
-1. Di aplikasi Anda, tepat setelah komentar ***Format dan kirim permintaan ke model*** dan sebelum kode yang ada, tambahkan cuplikan kode berikut untuk membaca teks dari `grounding.txt` guna memperkaya perintah pengguna dengan konteks grounding.
+1. Di aplikasi Anda, tepat setelah komentar ***Inisialisasi daftar pesan*** dan sebelum kode yang ada, tambahkan cuplikan kode berikut untuk membaca teks dari`grounding.txt` dan untuk menginisialisasi riwayat obrolan dengan konteks dasar.
 
     **C#**: Program.cs
 
     ```csharp
-    // Format and send the request to the model
+    // Initialize messages list
     Console.WriteLine("\nAdding grounding context from grounding.txt");
     string groundingText = System.IO.File.ReadAllText("grounding.txt");
-    userMessage = groundingText + userMessage;
+    var messagesList = new List<ChatMessage>()
+    {
+        new UserChatMessage(groundingText),
+    };
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Initialize messages array
+    print("\nAdding grounding context from grounding.txt")
+    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
+    messages_array = [{"role": "user", "content": grounding_text}]
+    ```
+
+1. Di bawah komentar ***Format dan kirim permintaan ke model***, ganti kode dari komentar hingga akhir perulangan **sementara** dengan kode berikut. Kode sebagian besar sama, tetapi sekarang menggunakan array pesan untuk mengirim permintaan ke model.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Format and send the request to the model
+    messagesList.Add(new SystemChatMessage(systemMessage));
+    messagesList.Add(new UserChatMessage(userMessage));
+    GetResponseFromOpenAI(messagesList);
     ```
 
     **Python**: application.py
 
     ```python
     # Format and send the request to the model
-    print("\nAdding grounding context from grounding.txt")
-    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
-    user_message = grounding_text + user_message
+    messages_array.append({"role": "system", "content": system_text})
+    messages_array.append({"role": "user", "content": user_text})
+    await call_openai_model(messages=messages_array, 
+        model=azure_oai_deployment, 
+        client=client
+    )
     ```
 
+1. Di bawah komentar ***Tentukan fungsi yang akan mendapatkan respons dari titik akhir Azure OpenAI***, ganti deklarasi fungsi dengan kode berikut untuk menggunakan daftar riwayat obrolan saat memanggil fungsi`GetResponseFromOpenAI` untuk C# atau `call_openai_model`untuk Python.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Define the function that gets the response from Azure OpenAI endpoint
+    private static void GetResponseFromOpenAI(List<ChatMessage> messagesList)
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Define the function that will get the response from Azure OpenAI endpoint
+    async def call_openai_model(messages, model, client):
+    ```
+    
+1. Terakhir, ganti semua kode di bawah ***Dapatkan tanggapan dari Azure OpenAI***. Kode sebagian besar sama, tetapi sekarang menggunakan array pesan untuk menyimpan riwayat percakapan.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Get response from Azure OpenAI
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
+    {
+        Temperature = 0.7f,
+        MaxOutputTokenCount = 800
+    };
+
+    ChatCompletion completion = chatClient.CompleteChat(
+        messagesList,
+        chatCompletionOptions
+    );
+
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
+    messagesList.Add(new AssistantChatMessage(completion.Content[0].Text));
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Get response from Azure OpenAI
+    print("\nSending request to Azure OpenAI model...\n")
+
+    # Call the Azure OpenAI model
+    response = await client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=800
+    )   
+
+    print("Response:\n" + response.choices[0].message.content + "\n")
+    messages.append({"role": "assistant", "content": response.choices[0].message.content})
+    ```
+    
 1. Simpan file dan jalankan ulang aplikasi Anda.
 1. Masukkan perintah berikut (dengan tetap memasukkan dan menyimpan **pesan sistem** dalam `system.txt`).
 
@@ -308,8 +389,18 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     What animal is the favorite of children at Contoso?
     ```
 
-> **Tips**: Jika ingin melihat respons lengkap dari Azure OpenAI, Anda dapat mengatur variabel **printFullResponse** ke `True`, lalu menjalankan ulang aplikasi.
+   Perhatikan bahwa model ini menggunakan informasi teks dasar untuk menjawab pertanyaan Anda.
 
+1. Tanpa mengubah pesan sistem, masukkan perintah berikut untuk pesan pengguna:
+
+    **Pesan pengguna:**
+
+    ```prompt
+    How can they interact with it at Contoso?
+    ```
+
+    Perhatikan bahwa model mengenali "mereka" sebagai anak-anak dan "itu" sebagai hewan favorit mereka, karena sekarang ia memiliki akses ke pertanyaan Anda sebelumnya dalam riwayat obrolan.
+   
 ## Penghapusan
 
 Setelah Anda selesai dengan sumber daya Azure OpenAI, ingatlah untuk menghapus penyebaran atau seluruh sumber daya pada **portal Microsoft Azure** di `https://portal.azure.com`.
