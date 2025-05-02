@@ -33,15 +33,13 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
     - **Subscription**: *Pilih langganan Azure yang telah disetujui untuk akses ke Azure OpenAI Service*
     - **Grup sumber daya**: *Memilih atau membuat grup sumber daya*
     - **Wilayah**: *Buat **pilihan acak** dari salah satu wilayah berikut*\*
-        - Kanada Timur
-        - AS Timur
-        - AS Timur 2
-        - Prancis Tengah
-        - Jepang Timur
-        - AS Tengah Bagian Utara
+        - US Timur
+        - US Timur 2
+        - US Tengah Utara
+        - US Tengah Selatan
         - Swedia Tengah
-        - Swiss Utara
-        - UK Selatan
+        - US Barat
+        - US Barat 3
     - **Nama**: *Nama unik pilihan Anda*
     - **Tingkat harga**: Standar S0
 
@@ -51,19 +49,25 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
 
 ## Terapkan model
 
-Selanjutnya, Anda akan menerapkan sumber daya model Azure OpenAI dari CLI. Lihat contoh ini dan ganti variabel berikut dengan nilai Anda sendiri dari atas:
+Selanjutnya, Anda akan menyebarkan sumber daya model Azure OpenAI dari Cloud Shell.
 
-```dotnetcli
-az cognitiveservices account deployment create \
-   -g <your_resource_group> \
-   -n <your_OpenAI_service> \
-   --deployment-name gpt-4o \
-   --model-name gpt-4o \
-   --model-version 2024-05-13 \
-   --model-format OpenAI \
-   --sku-name "Standard" \
-   --sku-capacity 5
-```
+1. Gunakan tombol **[\>_]** di sebelah kanan bilah pencarian di bagian atas halaman untuk membuat Cloud Shell baru di portal Azure, dengan memilih lingkungan ***Bash***. Cloud shell menyediakan antarmuka baris perintah dalam panel di bagian bawah portal Azure.
+
+    > **Catatan**: Jika sebelumnya Anda telah membuat cloud shell yang menggunakan lingkungan *PowerShell* , alihkan ke ***Bash***.
+
+1. Lihat contoh ini dan ganti variabel berikut dengan nilai Anda sendiri dari atas:
+
+    ```dotnetcli
+    az cognitiveservices account deployment create \
+       -g <your_resource_group> \
+       -n <your_OpenAI_service> \
+       --deployment-name gpt-4o \
+       --model-name gpt-4o \
+       --model-version 2024-05-13 \
+       --model-format OpenAI \
+       --sku-name "Standard" \
+       --sku-capacity 5
+    ```
 
 > **Catatan**: Kapasitas Sku diukur dalam ribuan token per menit. Batas tarif 5.000 token per menit sudah lebih dari cukup untuk menyelesaikan latihan ini dan masih menyisakan kapasitas untuk orang lain yang menggunakan langganan yang sama.
 
@@ -245,7 +249,7 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Amati outputnya, dan lihat bagaimana emailnya telah berubah sesuai dengan instruksi yang jelas dari Anda.
@@ -264,7 +268,7 @@ Sekarang setelah aplikasi Anda dikonfigurasi, jalankan untuk mengirim permintaan
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Amati output. Kali ini Anda mungkin akan melihat email dalam format yang sama, tetapi dengan nada yang jauh lebih informal. Bahkan, Anda mungkin akan melihat lelucon di dalamnya!
