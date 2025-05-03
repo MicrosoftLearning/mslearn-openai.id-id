@@ -20,13 +20,13 @@ Mari kita mulai dengan membuat proyek Azure AI Foundry.
     ![Tangkapan layar portal Azure AI Foundry.](../media/ai-foundry-home.png)
 
 1. Di beranda, pilih **+ Buat proyek**.
-1. Di wizard **Buat proyek**, masukkan nama proyek yang sesuai untuk (misalnya, `my-ai-project`) lalu tinjau sumber daya Azure yang akan dibuat secara otomatis untuk mendukung proyek Anda.
+1. Di wizard **Buat proyek**, masukkan nama yang valid untuk proyek Anda dan jika hub yang telah ada disarankan, pilih opsi untuk membuat yang baru. Kemudian tinjau sumber daya Azure yang akan dibuat secara otomatis untuk mendukung hub dan proyek Anda.
 1. Pilih **Kustomisasi** dan tentukan pengaturan berikut untuk hub Anda:
-    - **Nama hub**: *Nama unik - misalnya `my-ai-hub`*
+    - **Nama hub** : *Nama yang valid untuk hub Anda*
     - **Langganan**: *Langganan Azure Anda*
-    - **Grup sumber daya**: *Pilih atau buat grup sumber daya dengan nama unik (misalnya, `my-ai-resources`), atau pilih yang sudah ada*
+    - **Grup sumber daya**: *Buat atau pilih grup sumber daya*
     - **Lokasi**: Pilih **Bantu saya memilih** lalu pilih **dalle** di jendela Pembantu lokasi dan gunakan wilayah yang direkomendasikan\*
-    - **Menyambungkan Layanan Azure AI atau Azure OpenAI**: *Membuat sumber daya Layanan AI baru dengan nama yang sesuai (misalnya, `my-ai-services`) atau menggunakan yang sudah ada*
+    - **Menyambungkan Layanan Azure AI atau Azure OpenAI**: *Membuat sumber daya Layanan AI baru*
     - **Menyambungkan Azure AI Search**: Lewati koneksi
 
     > \* Sumber daya Azure OpenAI dibatasi oleh kuota regional. Jika batas kuota tercapai di akhir latihan, Anda mungkin perlu membuat sumber daya lain di wilayah yang berbeda.
@@ -40,12 +40,12 @@ Mari kita mulai dengan membuat proyek Azure AI Foundry.
 
 Sekarang Anda siap untuk menyebarkan model DALL-E untuk mendukung pembuatan gambar.
 
-1. Di toolbar di kanan atas halaman proyek Azure AI Foundry Anda, gunakan ikon **Fitur pratinjau** untuk mengaktifkan fitur **Sebarkan model ke layanan inferensi model Azure AI**.
+1. Di toolbar di kanan atas halaman proyek Azure AI Foundry Anda, gunakan ikon **Fitur pratinjau** untuk mengaktifkan fitur **Sebarkan model ke layanan inferensi model Azure AI**. Fitur ini memastikan penyebaran model Anda tersedia untuk layanan Inferensi Azure AI, yang akan Anda gunakan dalam kode aplikasi Anda.
 1. Di panel sebelah kiri untuk proyek Anda, di bagian **Aset saya**, pilih halaman **Model + titik akhir**.
 1. Pada halaman **Model + titik akhir** , di tab **Penyebaran model** di menu **+ Sebarkan model** pilih **Sebarkan model dasar**.
 1. Cari model **dall-e-3** dari daftar, pilih dan konfirmasi.
 1. Setujui perjanjian lisensi jika diminta, lalu sebarkan model dengan pengaturan berikut dengan memilih **Sesuaikan** dalam detail penyebaran:
-    - **Nama penyebaran** : *Nama unik untuk penyebaran model Anda - misalnya `dall-e-3` (ingat nama yang Anda tetapkan, Anda akan membutuhkannya nanti*)
+    - **Nama penyebaran**: *Nama yang valid untuk penyebaran model Anda*
     - **Tipe penyebaran**: Standar
     - **Detail penyebaran**: *Gunakan pengaturan default*
 1. Tunggu hingga status penyediaan penyebaran menjadi **Selesai**.
@@ -78,20 +78,20 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     > **Catatan**: Jika sebelumnya Anda telah membuat cloud shell yang menggunakan lingkungan *Bash* , alihkan ke ***PowerShell***.
 
-1. Di toolbar cloud shell, di menu **Pengaturan**, pilih **Buka versi Klasik** (ini diperlukan untuk menggunakan editor kode).
+5. Di toolbar cloud shell, di menu **Pengaturan**, pilih **Buka versi Klasik** (ini diperlukan untuk menggunakan editor kode).
 
-    > **Tips**: Saat Anda menempelkan perintah ke cloudshell, ouput mungkin mengambil sejumlah besar buffer layar. Anda dapat menghapus layar dengan memasukkan `cls` perintah untuk mempermudah fokus pada setiap tugas.
+    **<font color="red">Pastikan Anda telah beralih ke versi klasik cloud shell sebelum melanjutkan.</font>**
 
-1. Di panel PowerShell, masukkan perintah berikut untuk mengkloning repositori GitHub untuk latihan ini:
+1. Di panel cloud shell, masukkan perintah berikut untuk mengkloning repo GitHub yang berisi file kode untuk latihan ini (ketik perintah, atau salin ke clipboard lalu klik kanan di baris perintah dan tempel sebagai teks biasa):
 
     ```
     rm -r mslearn-openai -f
     git clone https://github.com/microsoftlearning/mslearn-openai mslearn-openai
     ```
 
-> **Catatan**: Ikuti langkah-langkah untuk bahasa pemrograman yang Anda pilih.
+    > **Tips**: Saat Anda menempelkan perintah ke cloudshell, ouput mungkin mengambil sejumlah besar buffer layar. Anda dapat menghapus layar dengan memasukkan `cls` perintah untuk mempermudah fokus pada setiap tugas.
 
-1. Setelah repositori dikloning, navigasikan ke folder yang berisi file kode aplikasi:  
+1. Setelah repo dikloning, navigasikan ke folder khusus bahasa yang berisi file kode aplikasi, berdasarkan bahasa pemrograman pilihan Anda (Python atau C#):  
 
     **Python**
 
@@ -110,10 +110,10 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-identity azure-ai-projects openai requests
     ```
-
-    *Anda dapat mengabaikan kesalahan tentang versi pip dan jalur lokal*
 
     **C#**
 
@@ -164,7 +164,8 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     **Python**
 
-    ```
+    ```python
+   # Add references
    from dotenv import load_dotenv
    from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
@@ -174,7 +175,8 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     **C#**
 
-    ```
+    ```csharp
+   // Add references
    using Azure.Identity;
    using Azure.AI.Projects;
    using Azure.AI.OpenAI;
@@ -186,7 +188,8 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     **Python**
 
-    ```
+    ```python
+   # Initialize the project client
    project_client = AIProjectClient.from_connection_string(
         conn_str=project_connection,
         credential=DefaultAzureCredential())
@@ -194,7 +197,8 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     **C#**
 
-    ```
+    ```csharp
+   // Initialize the project client
    var projectClient = new AIProjectClient(project_connection,
                         new DefaultAzureCredential());
     ```
@@ -203,14 +207,16 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     **Python**
 
-    ```
+    ```python
+   # Get an OpenAI client
    openai_client = project_client.inference.get_azure_openai_client(api_version="2024-06-01")
 
     ```
 
     **C#**
 
-    ```
+    ```csharp
+   // Get an OpenAI client
    ConnectionResponse connection = projectClient.GetConnectionsClient().GetDefaultConnection(ConnectionType.AzureOpenAI, withCredential: true);
 
    var connectionProperties = connection.Properties as ConnectionPropertiesApiKeyAuth;
@@ -228,6 +234,7 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
     **Python**
 
     ```python
+   # Generate an image
    result = openai_client.images.generate(
         model=model_deployment,
         prompt=input_text,
@@ -240,7 +247,8 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     **C#**
 
-    ```
+    ```csharp
+   // Generate an image
    var imageGeneration = await openAIimageClient.GenerateImageAsync(
             input_text,
             new ImageGenerationOptions()
@@ -276,15 +284,13 @@ Model ini tampaknya bekerja di playground. Sekarang Anda dapat menggunakan SDK A
 
     > **Catatan**: Dalam aplikasi sederhana ini, kita belum menerapkan logika untuk mempertahankan riwayat percakapan; sehingga model akan memperlakukan setiap perintah sebagai permintaan baru tanpa konteks perintah sebelumnya.
 
-1. Untuk mengunduh dan melihat gambar yang dihasilkan oleh aplikasi Anda, di toolbar untuk panel cloud shell, gunakan tombol **Unggah/Unduh file** untuk mengunduh file, lalu buka. Untuk mengunduh file, selesaikan jalur filenya di antarmuka unduhan; misalnya:
+1. Untuk mengunduh dan melihat gambar yang dihasilkan oleh aplikasi Anda, gunakan perintah **unduhan **shell cloud - menentukan file .png yang dihasilkan:
 
-    **Python**
+    ```
+   download ./images/image_1.png
+    ```
 
-    /beranda/*pengguna*`/mslearn-openai/Labfiles/03-image-generation/Python/images/image_1.png`
-
-    **C#**
-
-    /beranda/*pengguna*`/mslearn-openai/Labfiles/03-image-generation/CSharp/images/image_1.png`
+    Perintah unduh membuat tautan popup di kanan bawah browser Anda, yang dapat Anda pilih untuk mengunduh dan membuka file.
 
 ## Ringkasan
 

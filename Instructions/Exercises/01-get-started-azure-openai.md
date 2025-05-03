@@ -21,16 +21,13 @@ Jika Anda belum memilikinya, provisikan sumber daya Azure OpenAI di langganan Az
     - **Subscription**: *Pilih langganan Azure yang telah disetujui untuk akses ke Azure OpenAI Service*
     - **Grup sumber daya**: *Memilih atau membuat grup sumber daya*
     - **Wilayah**: *Buat **pilihan acak** dari salah satu wilayah berikut*\*
-        - Australia Timur
-        - Kanada Timur
-        - AS Timur
-        - AS Timur 2
-        - Prancis Tengah
-        - Jepang Timur
-        - AS Tengah Bagian Utara
+        - US Timur
+        - US Timur 2
+        - US Tengah Utara
+        - US Tengah Selatan
         - Swedia Tengah
-        - Swiss Utara
-        - UK Selatan
+        - US Barat
+        - US Barat 3
     - **Nama**: *Nama unik pilihan Anda*
     - **Tingkat harga**: Standar S0
 

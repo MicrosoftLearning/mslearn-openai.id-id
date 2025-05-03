@@ -25,15 +25,13 @@ Untuk menyelesaikan latihan ini, Anda perlu:
     - **Subscription**: *Pilih langganan Azure yang telah disetujui untuk akses ke Azure OpenAI Service*
     - **Grup sumber daya**: *Memilih atau membuat grup sumber daya*
     - **Wilayah**: *Buat **pilihan acak** dari salah satu wilayah berikut*\*
-        - Kanada Timur
-        - AS Timur
-        - AS Timur 2
-        - Prancis Tengah
-        - Jepang Timur
-        - AS Tengah Bagian Utara
+        - US Timur
+        - US Timur 2
+        - US Tengah Utara
+        - US Tengah Selatan
         - Swedia Tengah
-        - Swiss Utara
-        - UK Selatan
+        - US Barat
+        - US Barat 3
     - **Nama**: *Nama unik pilihan Anda*
     - **Tingkat harga**: Standar S0
 
@@ -76,7 +74,11 @@ Anda akan menggunakan dua model AI dalam latihan ini:
 
 ## Terapkan model
 
-Selanjutnya, Anda akan menerapkan sumber daya model Azure OpenAI dari CLI. Di portal Azure; pilih ikon **Cloud Shell** dari bilah menu atas dan pastikan terminal Anda diatur ke **Bash**. Mengacu pada contoh ini dan ganti variabel berikut dengan nilai Anda sendiri:
+Selanjutnya, Anda akan menyebarkan model Azure OpenAI dari Cloud Shell.
+
+1. Gunakan tombol **[\>_]** di sebelah kanan bilah pencarian di bagian atas halaman untuk membuat Cloud Shell baru di portal Azure, dengan memilih lingkungan ***Bash***. Cloud shell menyediakan antarmuka baris perintah dalam panel di bagian bawah portal Azure.
+
+    > **Catatan**: Jika sebelumnya Anda telah membuat cloud shell yang menggunakan lingkungan *PowerShell* , alihkan ke ***Bash***.
 
 ```dotnetcli
 az cognitiveservices account deployment create \
